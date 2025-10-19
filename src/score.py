@@ -32,7 +32,7 @@ class Score:
         return self
     
     def setTournamentRank(self, value):
-        self.TournamentRank = value
+        self.TournamentRank = int(value)
         return self
     
     def setPlayer1(self, value):
@@ -44,11 +44,11 @@ class Score:
         return self
     
     def setVictoryPoints1(self, value):
-        self.VictoryPoints1 = value
+        self.VictoryPoints1 = int(value)
         return self
     
     def setTournamentPoints1(self, value):
-        self.TournamentPoints1 = value
+        self.TournamentPoints1 = int(value)
         return self
         
     def setPlayer2(self, value):
@@ -60,9 +60,9 @@ class Score:
         return self
     
     def setVictoryPoints2(self, value):
-        self.VictoryPoints2 = value
+        self.VictoryPoints2 = int(value)
         return self
     
     def setTournamentPoints2(self, value):
-        self.TournamentPoints2 = value
+        self.TournamentPoints2 = int(value)
         return self

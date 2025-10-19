@@ -30,7 +30,7 @@ class Test_CalculateRanks(unittest.TestCase):
 
         s = Score()
         s.setArmy1('Kozacy').setArmy2('Tatarzy').setPlayer1('Krashan Bhamaradżanga').setPlayer2('Hans Gonschorek')
-        s.setDatetime('2025-07-07 13:00').setTournament('Pola Chabrów 2025')
+        s.setDatetime('2025-07-07 13:00').setTournament('Pola Chabrów 2025').setTournamentRank(30)
         s.setVictoryPoints1(7).setVictoryPoints2(8).setTournamentPoints1(0).setTournamentPoints2(3)
 
         src.calculate_ranks.adjust_rank_by_score(s,r)
