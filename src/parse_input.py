@@ -1,10 +1,11 @@
+from typing import List
 import csv
 import sys
 from pathlib import Path
 
 from src.score import Score
 
-def load_scores(scores_file: Path):
+def load_scores(scores_file: Path) -> List[Score]:
 
     encoding = 'utf-8-sig';
     delimiter = ';';
