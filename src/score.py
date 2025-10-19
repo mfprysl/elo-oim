@@ -3,6 +3,7 @@ from datetime import *
 class Score:
     Datetime = datetime.fromisoformat('1974-07-07 12:00')
     Tournament = 'T'
+    TournamentRank = 20
     Player1 = 'P1'
     Army1 = 'A1'
     VictoryPoints1 = 0
@@ -13,7 +14,7 @@ class Score:
     TournamentPoints2 = 0
 
     def __str__(self):
-        return (f"{self.Datetime} {self.Tournament}"
+        return (f"{self.Datetime} {self.Tournament} ({self.TournamentRank})"
                 f" | {self.Player1} ({self.Army1}) : {self.Player2} ({self.Army2})"
                 f" | {self.TournamentPoints1} ({self.VictoryPoints1})"
                 f" : {self.TournamentPoints2} ({self.VictoryPoints2})"
@@ -28,6 +29,10 @@ class Score:
     
     def setTournament(self, value):
         self.Tournament = value
+        return self
+    
+    def setTournamentRank(self, value):
+        self.TournamentRank = value
         return self
     
     def setPlayer1(self, value):

@@ -1,7 +1,7 @@
-﻿Datetime;Tournament;Player1;Army1;VictoryPoints1;TournamentPoints1;Player2;Army2;VictoryPoints2;TournamentPoints2
-2025-07-07 09:00;Pola Chabrów 2025;Zenon Kuśmider;Korona;13;3;Krashan Bhamaradżanga;Kozacy;3;0
-2025-07-07 09:00;Pola Chabrów 2025;Hans Gonschorek;Tatarzy;7;1;Stanisław Krokodyl;Korona;7;1
-2025-07-07 13:00;Pola Chabrów 2025;Krashan Bhamaradżanga;Kozacy;7;0;Hans Gonschorek;Tatarzy;8;3
-2025-07-07 13:00;Pola Chabrów 2025;Zenon Kuśmider;Korona;14;3;Stanisław Krokodyl;Korona;4;0
-2025-08-01 09:00;Bitka o Jabłko 2025;Hans Gonschorek;Tatarzy;18;3;Stanisław Krokodyl;Korona;0;0
+﻿Datetime;Tournament;TournamentRank;Player1;Army1;VictoryPoints1;TournamentPoints1;Player2;Army2;VictoryPoints2;TournamentPoints2
+2025-08-01 09:00;Bitka o Jabłko 2025;20;Hans Gonschorek;Tatarzy;18;3;Stanisław Krokodyl;Korona;0;0
+2025-07-07 09:00;Pola Chabrów 2025;30;Zenon Kuśmider;Korona;13;3;Krashan Bhamaradżanga;Kozacy;3;0
+2025-07-07 09:00;Pola Chabrów 2025;30;Hans Gonschorek;Tatarzy;7;1;Stanisław Krokodyl;Korona;7;1
+2025-07-07 13:00;Pola Chabrów 2025;30;Krashan Bhamaradżanga;Kozacy;7;0;Hans Gonschorek;Tatarzy;8;3
+2025-07-07 13:00;Pola Chabrów 2025;30;Zenon Kuśmider;Korona;14;3;Stanisław Krokodyl;Korona;4;0
 

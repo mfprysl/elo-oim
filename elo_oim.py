@@ -9,6 +9,7 @@ print("Elo OiM!")
 scores = parse_input.load_scores(scores_filename)
 for s in scores:
     print(s)
-ranking = calculate_ranks.calculate_ranks(scores)
-for r in ranking:
-    print(r)
+ranking = {}
+calculate_ranks.calculate_ranks(scores, ranking)
+for p in ranking:
+    print(f"{p} : {ranking[p]}")

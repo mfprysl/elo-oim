@@ -30,6 +30,7 @@ def load_scores(scores_file: Path) -> List[Score]:
                 s = Score()
                 s.setDatetime(row['Datetime'])
                 s.setTournament(row['Tournament'])
+                s.setTournamentRank(row['TournamentRank'])
                 s.setPlayer1(row['Player1'])
                 s.setArmy1(row['Army1'])
                 s.setVictoryPoints1(row['VictoryPoints1'])
