@@ -23,4 +23,18 @@ class Test_CalculateRanks(unittest.TestCase):
 
         self.assertEqual(scores[0].Army1,'b1')
         self.assertEqual(scores[1].Army1,'a1')
-        
+
+    def test_AdjustRankByScore(self):
+
+        r = {'Krashan Bhamaradżanga': 975}
+
+        s = Score()
+        s.setArmy1('Kozacy').setArmy2('Tatarzy').setPlayer1('Krashan Bhamaradżanga').setPlayer2('Hans Gonschorek')
+        s.setDatetime('2025-07-07 13:00').setTournament('Pola Chabrów 2025')
+        s.setVictoryPoints1(7).setVictoryPoints2(8).setTournamentPoints1(0).setTournamentPoints2(3)
+
+        src.calculate_ranks.adjust_rank_by_score(s,r)
+
+        self.assertEqual(round(r['Krashan Bhamaradżanga'],2),960.15)
+        self.assertEqual(round(r['Hans Gonschorek'],2),1014.85)
+
