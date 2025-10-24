@@ -5,6 +5,23 @@ from pathlib import Path
 
 from src.score import Score
 
+def load_all(scores_folder: Path) -> List[Score]:
+    scores = []
+
+    if not isinstance(scores_folder, Path):
+        scores_folder = Path(scores_folder)
+
+    print('Opening folder ' + str(scores_folder.resolve()) + ' ...')
+
+    for file in sorted(scores_folder.glob('*.csv')):
+
+        if not file.is_file():
+            continue
+    
+        scores += load_scores(file)
+
+    return scores
+
 def load_scores(scores_file: Path) -> List[Score]:
 
     encoding = 'utf-8-sig';

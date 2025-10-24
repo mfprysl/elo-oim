@@ -3,10 +3,10 @@ from src.score import Score
 import src.parse_input as parse_input
 import src.calculate_ranks as calculate_ranks
 
-scores_filename = "scores.csv"
+scores_folder = "data"
 
 print("Elo OiM!")
-scores = parse_input.load_scores(scores_filename)
+scores = parse_input.load_all(scores_folder)
 
 ranking = {}
 calculate_ranks.calculate_ranks(scores, ranking)
