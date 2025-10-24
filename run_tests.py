@@ -1,4 +1,7 @@
 import unittest
+import logging
+
+logging.basicConfig(level = logging.ERROR)
 
 loader = unittest.TestLoader()
 suite = loader.discover(start_dir = 'tests')

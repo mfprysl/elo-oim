@@ -2,6 +2,9 @@ from datetime import *
 from src.score import Score
 import src.parse_input as parse_input
 import src.calculate_ranks as calculate_ranks
+import logging
+
+logging.basicConfig(level=logging.INFO, format='\t%(message)s')
 
 scores_folder = "data"
 

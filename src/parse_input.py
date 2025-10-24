@@ -2,7 +2,7 @@ from typing import List
 import csv
 import sys
 from pathlib import Path
-
+import logging
 from src.score import Score
 
 def load_all(scores_folder: Path) -> List[Score]:
@@ -11,7 +11,7 @@ def load_all(scores_folder: Path) -> List[Score]:
     if not isinstance(scores_folder, Path):
         scores_folder = Path(scores_folder)
 
-    print('Opening folder ' + str(scores_folder.resolve()) + ' ...')
+    logging.info('Opening folder ' + str(scores_folder.resolve()) + ' ...')
 
     for file in sorted(scores_folder.glob('*.csv')):
 
@@ -32,10 +32,10 @@ def load_scores(scores_file: Path) -> List[Score]:
     if not isinstance(scores_file, Path):
         scores_file = Path(scores_file)
 
-    print('Reading ' + str(scores_file.resolve()) + ' ...')
+    logging.info('Reading ' + str(scores_file.resolve()) + ' ...')
 
     if not scores_file.exists():
-        print(f"Error: file not found: {scores_file}")
+        logging.error(f"Error: file not found: {scores_file}")
         sys.exit(1)
 
     try:
@@ -57,10 +57,10 @@ def load_scores(scores_file: Path) -> List[Score]:
                 scores.append(s)
 
     except UnicodeDecodeError:
-        print(f"Error: could not decode file using encoding '{encoding}'.")
+        logging.error(f"Error: could not decode file using encoding '{encoding}'.")
         sys.exit(2)
     except csv.Error as e:
-        print(f"CSV parsing error: {e}")
+        logging.error(f"CSV parsing error: {e}")
         sys.exit(3)
 
     return scores
