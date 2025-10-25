@@ -4,6 +4,7 @@ from typing import Tuple, Dict
 SCORE_STANDARD = 0 # no levels, just exponent
 SCORE_7LEVELS_BIG = 1 # 1/0.9/0.8/0.5/0.2/0.1/0
 SCORE_7LEVELS_SMALL = 2 # 1/0.65/0.6/0.5/0.4/0.35/0
+SCORE_5LEVELS_SMALL = 3 # 1/0.6/0.5/0.4/0
 
 class Score:
     Datetime = datetime.fromisoformat('1974-07-07 12:00')
@@ -185,12 +186,39 @@ class Score7LevelsSmall(Score):
 
         return [P1_score, P2_score]
 
+class Score5LevelsSmall(Score):
+    ScoringType = SCORE_5LEVELS_SMALL
+    ScoringTypeStr = 'scoring 5LEVELS_SMALL'
+
+    def getScore(self) -> Tuple[int, int]:
+        diff = self.VictoryPoints1 - self.VictoryPoints2
+
+        if diff >= 2:
+            P1_score = 1.0
+            P2_score = 0.0
+        elif diff >= 1:
+            P1_score = 0.6
+            P2_score = 0.4
+        elif diff > -1:
+            P1_score = 0.5
+            P2_score = 0.5
+        elif diff > -2:
+            P1_score = 0.4
+            P2_score = 0.6
+        else:
+            P1_score = 0.0
+            P2_score = 1.0
+
+        return [P1_score, P2_score]
+
 class ScoreFactory:
-    def getScore(self,row: Dict) -> Score:
+    def getScore(self, row: Dict) -> Score:
         if 'ScoringType' in row and row['ScoringType'] == '7LEVELS_BIG':
             s = Score7LevelsBig()
         elif 'ScoringType' in row and row['ScoringType'] == '7LEVELS_SMALL':
             s = Score7LevelsSmall()
+        elif 'ScoringType' in row and row['ScoringType'] == '5LEVELS_SMALL':
+            s = Score5LevelsSmall()
         else:
             s = Score()
 
