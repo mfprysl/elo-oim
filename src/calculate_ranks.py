@@ -1,5 +1,7 @@
 from datetime import *
+import logging
 from src.score import Score
+import src.score as score
 from typing import List, Dict
 
 def sort_scores(scores: List[Score]) -> List[Score]:
@@ -10,15 +12,40 @@ def adjust_rank_by_score(s: Score, ranking:Dict[str,float]):
     P1_previous_rank = 1000 if not s.Player1 in ranking else ranking[s.Player1]
     P2_previous_rank = 1000 if not s.Player2 in ranking else ranking[s.Player2]
 
-    if s.TournamentPoints1 > s.TournamentPoints2:
-        P1_score = 1.0
-        P2_score = 0.0
-    elif s.TournamentPoints1 < s.TournamentPoints2:
-        P1_score = 0.0
-        P2_score = 1.0
+    if s.ScoreType == score.SCORE_7LEVELS:
+        diff = s.TournamentPoints1 - s.TournamentPoints2
+
+        if diff >= 11:
+            P1_score = 1.0
+            P2_score = 0.0
+        elif diff >= 6:
+            P1_score = 0.9
+            P2_score = 0.1
+        elif diff >= 2:
+            P1_score = 0.8
+            P2_score = 0.2
+        elif diff >= -1:
+            P1_score = 0.5
+            P2_score = 0.5
+        elif diff >= -5:
+            P1_score = 0.2
+            P2_score = 0.8
+        elif diff >= -10:
+            P1_score = 0.1
+            P2_score = 0.9
+        else:
+            P1_score = 0.0
+            P2_score = 1.0
     else:
-        P1_score = 0.5
-        P2_score = 0.5
+        if s.TournamentPoints1 > s.TournamentPoints2:
+            P1_score = 1.0
+            P2_score = 0.0
+        elif s.TournamentPoints1 < s.TournamentPoints2:
+            P1_score = 0.0
+            P2_score = 1.0
+        else:
+            P1_score = 0.5
+            P2_score = 0.5
 
     result_rank = s.TournamentRank + 2.0 * abs(s.VictoryPoints1 - s.VictoryPoints2)
 
