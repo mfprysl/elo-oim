@@ -38,32 +38,14 @@ def load_scores(scores_file: Path) -> List[score.Score]:
         logging.error(f"Error: file not found: {scores_file}")
         sys.exit(1)
 
+    scoreFactory = score.ScoreFactory()
+    
     try:
         with scores_file.open("r", encoding=encoding, newline="") as f:
             reader = csv.DictReader(f, delimiter=delimiter)
             for row_number, row in enumerate(reader, start=1):
-                if 'ScoringType' in row and row['ScoringType'] == '7LEVELS_BIG':
-                    s = score.Score7LevelsBig()
-                else:
-                    s = score.Score()
-                s.setDatetime(row['Datetime'])
-                s.setTournament(row['Tournament'])
-                s.setTournamentRank(row['TournamentRank'])
-                s.setPlayer1(row['Player1'])
 
-                if 'Army1' in row:
-                    s.setArmy1(row['Army1'])
-                
-                s.setVictoryPoints1(row['VictoryPoints1'])
-                s.setTournamentPoints1(row['TournamentPoints1'])
-                s.setPlayer2(row['Player2'])
-                
-                if 'Army2' in row:
-                    s.setArmy2(row['Army2'])
-                
-                s.setVictoryPoints2(row['VictoryPoints2'])
-                s.setTournamentPoints2(row['TournamentPoints2'])
-                                
+                s = scoreFactory.getScore(row)
                 scores.append(s)
 
     except UnicodeDecodeError:

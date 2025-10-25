@@ -1,5 +1,5 @@
 import unittest
-from src.score import Score, Score7LevelsBig
+from src.score import Score, Score7LevelsBig, Score7LevelsSmall
 import src.calculate_ranks
 
 class Test_CalculateRanks(unittest.TestCase):
@@ -38,7 +38,7 @@ class Test_CalculateRanks(unittest.TestCase):
         self.assertEqual(round(r['Krashan Bhamaradżanga'],2),960.15)
         self.assertEqual(round(r['Hans Gonschorek'],2),1014.85)
 
-    def test_7levels(self):
+    def test_7LevelsBig(self):
 
         r = {}
         scores = []
@@ -51,4 +51,16 @@ class Test_CalculateRanks(unittest.TestCase):
         self.assertEqual(round(r['p1'],2),1007.80)
         self.assertEqual(round(r['p2'],2),992.20)
 
+    def test_7LevelsSmall(self):
+
+        r = {}
+        scores = []
+        s1 = Score7LevelsSmall()
+        s1.setArmy1('a1').setArmy2('a2').setPlayer1('p1').setPlayer2('p2')
+        s1.setDatetime('2009-10-08 11:00').setTournament('t').setTournamentRank(25)
+        s1.setVictoryPoints1(3).setVictoryPoints2(5)
+        scores.append(s1)
+        src.calculate_ranks.calculate_ranks(scores, r)
+        self.assertEqual(round(r['p1'],2),995.65)
+        self.assertEqual(round(r['p2'],2),1004.35)
 

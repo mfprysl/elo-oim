@@ -19,3 +19,9 @@ class Test_Score(unittest.TestCase):
         s = score.Score7LevelsBig()
         self.assertEqual(s.__str__(),
             '1974-07-07 12:00:00 T (20) | P1 : P2 | 0 (0) : 0 (0), scoring 7LEVELS_BIG')
+
+    def test_SetUpScore7LevelsBig(self):
+
+        s = score.Score7LevelsSmall()
+        self.assertEqual(s.__str__(),
+            '1974-07-07 12:00:00 T (20) | P1 : P2 | 0 (0) : 0 (0), scoring 7LEVELS_SMALL')

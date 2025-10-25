@@ -1,5 +1,5 @@
 from datetime import *
-from typing import Tuple
+from typing import Tuple, Dict
 
 SCORE_STANDARD = 0 # no levels, just exponent
 SCORE_7LEVELS_BIG = 1 # 1/0.9/0.8/0.5/0.2/0.1/0
@@ -122,3 +122,94 @@ class Score7LevelsBig(Score):
             P2_score = 1.0
 
         return [P1_score, P2_score]
+
+class Score7LevelsBig(Score):
+    ScoringType = SCORE_7LEVELS_BIG
+    ScoringTypeStr = 'scoring 7LEVELS_BIG'
+
+    def getScore(self) -> Tuple[int, int]:
+        diff = self.VictoryPoints1 - self.VictoryPoints2
+
+        if diff >= 11:
+            P1_score = 1.0
+            P2_score = 0.0
+        elif diff >= 6:
+            P1_score = 0.9
+            P2_score = 0.1
+        elif diff >= 2:
+            P1_score = 0.8
+            P2_score = 0.2
+        elif diff >= -1:
+            P1_score = 0.5
+            P2_score = 0.5
+        elif diff >= -5:
+            P1_score = 0.2
+            P2_score = 0.8
+        elif diff >= -10:
+            P1_score = 0.1
+            P2_score = 0.9
+        else:
+            P1_score = 0.0
+            P2_score = 1.0
+
+        return [P1_score, P2_score]
+
+class Score7LevelsSmall(Score):
+    ScoringType = SCORE_7LEVELS_SMALL
+    ScoringTypeStr = 'scoring 7LEVELS_SMALL'
+
+    def getScore(self) -> Tuple[int, int]:
+        diff = self.VictoryPoints1 - self.VictoryPoints2
+
+        if diff >= 3:
+            P1_score = 1.0
+            P2_score = 0.0
+        elif diff >= 2:
+            P1_score = 0.65
+            P2_score = 0.35
+        elif diff >= 1:
+            P1_score = 0.6
+            P2_score = 0.4
+        elif diff > -1:
+            P1_score = 0.5
+            P2_score = 0.5
+        elif diff > -2:
+            P1_score = 0.4
+            P2_score = 0.6
+        elif diff > -3:
+            P1_score = 0.35
+            P2_score = 0.65
+        else:
+            P1_score = 0.0
+            P2_score = 1.0
+
+        return [P1_score, P2_score]
+
+class ScoreFactory:
+    def getScore(self,row: Dict) -> Score:
+        if 'ScoringType' in row and row['ScoringType'] == '7LEVELS_BIG':
+            s = Score7LevelsBig()
+        elif 'ScoringType' in row and row['ScoringType'] == '7LEVELS_SMALL':
+            s = Score7LevelsSmall()
+        else:
+            s = Score()
+
+        s.setDatetime(row['Datetime'])
+        s.setTournament(row['Tournament'])
+        s.setTournamentRank(row['TournamentRank'])
+        s.setPlayer1(row['Player1'])
+
+        if 'Army1' in row:
+            s.setArmy1(row['Army1'])
+        
+        s.setVictoryPoints1(row['VictoryPoints1'])
+        s.setTournamentPoints1(row['TournamentPoints1'])
+        s.setPlayer2(row['Player2'])
+        
+        if 'Army2' in row:
+            s.setArmy2(row['Army2'])
+        
+        s.setVictoryPoints2(row['VictoryPoints2'])
+        s.setTournamentPoints2(row['TournamentPoints2'])
+
+        return s
