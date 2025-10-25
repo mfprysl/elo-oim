@@ -1,8 +1,9 @@
 from datetime import *
+from typing import Tuple
 
-SCORE_STANDARD = 0
-SCORE_3LEVELS = 0 # win/draw/loss
-SCORE_7LEVELS = 1 # grand win/big win/small win/draw/loss/big loss/grand loss
+SCORE_STANDARD = 0 # no levels, just exponent
+SCORE_7LEVELS_BIG = 1 # 1/0.9/0.8/0.5/0.2/0.1/0
+SCORE_7LEVELS_SMALL = 2 # 1/0.65/0.6/0.5/0.4/0.35/0
 
 class Score:
     Datetime = datetime.fromisoformat('1974-07-07 12:00')
@@ -16,13 +17,13 @@ class Score:
     Army2 = ''
     VictoryPoints2 = 0
     TournamentPoints2 = 0
-    ScoreType = SCORE_3LEVELS
+    ScoringType = SCORE_STANDARD
 
     def __str__(self):
 
-        strScoreType = '3 levels'
-        if self.ScoreType == SCORE_7LEVELS: 
-            strScoreType = '7 levels'
+        strScoringType = 'standard scoring'
+        if self.ScoringType == SCORE_7LEVELS_BIG: 
+            strScoringType = '7 levels big'
 
         strArmy1 = '' if self.Army1 == '' else f" ({self.Army1})"
         strArmy2 = '' if self.Army2 == '' else f" ({self.Army2})"
@@ -31,7 +32,7 @@ class Score:
                 f" | {self.Player1}{strArmy1} : {self.Player2}{strArmy2}"
                 f" | {self.TournamentPoints1} ({self.VictoryPoints1})"
                 f" : {self.TournamentPoints2} ({self.VictoryPoints2})"
-                f", {strScoreType}"
+                f", {strScoringType}"
                 )
 
     def setDatetime(self, value):
@@ -81,6 +82,65 @@ class Score:
         self.TournamentPoints2 = int(value)
         return self
 
-    def setScoreType(self, value):
-        self.ScoreType = int(value)
+    def setScoringType(self, value):
+        self.ScoringType = int(value)
         return self
+
+    def getScore(self) -> Tuple[int, int]:
+        if self.TournamentPoints1 > s.TournamentPoints2:
+            P1_score = 1.0
+            P2_score = 0.0
+        elif self.TournamentPoints1 < s.TournamentPoints2:
+            P1_score = 0.0
+            P2_score = 1.0
+        else:
+            P1_score = 0.5
+            P2_score = 0.5
+
+        return [P1_score, P2_score]
+
+class ScoringType:
+    def getScore(self, s: Score) -> Tuple[int, int]:
+        return [0, 0]
+
+class ScoringTypeStandard(ScoringType):
+    def getScore(self, s: Score) -> Tuple[int, int]:
+        if s.TournamentPoints1 > s.TournamentPoints2:
+            P1_score = 1.0
+            P2_score = 0.0
+        elif s.TournamentPoints1 < s.TournamentPoints2:
+            P1_score = 0.0
+            P2_score = 1.0
+        else:
+            P1_score = 0.5
+            P2_score = 0.5
+
+        return [P1_score, P2_score]
+
+class ScoringType7LevelsBig(ScoringType):
+    def getScore(self, s: Score) -> Tuple[int, int]:
+        diff = s.VictoryPoints1 - s.VictoryPoints2
+
+        if diff >= 11:
+            P1_score = 1.0
+            P2_score = 0.0
+        elif diff >= 6:
+            P1_score = 0.9
+            P2_score = 0.1
+        elif diff >= 2:
+            P1_score = 0.8
+            P2_score = 0.2
+        elif diff >= -1:
+            P1_score = 0.5
+            P2_score = 0.5
+        elif diff >= -5:
+            P1_score = 0.2
+            P2_score = 0.8
+        elif diff >= -10:
+            P1_score = 0.1
+            P2_score = 0.9
+        else:
+            P1_score = 0.0
+            P2_score = 1.0
+
+        return [P1_score, P2_score]

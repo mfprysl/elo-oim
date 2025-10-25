@@ -7,10 +7,10 @@ class Test_Score(unittest.TestCase):
 
         s = score.Score()
         self.assertEqual(s.__str__(),
-                         '1974-07-07 12:00:00 T (20) | P1 : P2 | 0 (0) : 0 (0), 3 levels')
+                         '1974-07-07 12:00:00 T (20) | P1 : P2 | 0 (0) : 0 (0), standard scoring')
         s.setArmy1('a1').setArmy2('a2').setPlayer1('p1').setPlayer2('p2')
         s.setDatetime('2009-10-08 11:00').setTournament('t').setTournamentRank('30')
         s.setVictoryPoints1(4).setVictoryPoints2(2).setTournamentPoints1(3).setTournamentPoints2(1)
-        s.setScoreType(score.SCORE_7LEVELS)
+        s.setScoringType(score.SCORE_7LEVELS_BIG)
         self.assertEqual(s.__str__(),
-                         '2009-10-08 11:00:00 t (30) | p1 (a1) : p2 (a2) | 3 (4) : 1 (2), 7 levels')
+            '2009-10-08 11:00:00 t (30) | p1 (a1) : p2 (a2) | 3 (4) : 1 (2), 7 levels big')

@@ -1,25 +1,25 @@
-﻿Datetime;Tournament;TournamentRank;Player1;Army1;VictoryPoints1;TournamentPoints1;Player2;Army2;VictoryPoints2;TournamentPoints2
-2023-06-18 09:30;Warszawski Turniej Ogniem i Mieczem;20;Aleksander Gados;;12;6;"Arkadiusz ""ArekS"" Stamm";;0;0
-2023-06-18 09:30;Warszawski Turniej Ogniem i Mieczem;20;"Łukasz ""QUAR"" Ceniak";;0;0;"Piotr ""P."" Miazga";;12;6
-2023-06-18 09:30;Warszawski Turniej Ogniem i Mieczem;20;"Adam ""Wasil"" Wasilewski";;12;6;Sławomir Porębski;;0;0
-2023-06-18 09:30;Warszawski Turniej Ogniem i Mieczem;20;"Mikołaj ""Batura"" Bieńkowski";;12;5;"Krzysiek ""Kysiek"" Dąbkowski";;2;1
-2023-06-18 09:30;Warszawski Turniej Ogniem i Mieczem;20;"Michał ""Raven"" Rapacz";;12;5;"Cezary ""Cezar"" Młotek";;2;1
-2023-06-18 09:30;Warszawski Turniej Ogniem i Mieczem;20;"Kamil ""miszczu"" Jasak";;6;4;Radosław Struzik;;3;2
-2023-06-18 09:30;Warszawski Turniej Ogniem i Mieczem;20;"Lukasz ""Kędzi"" Kędziora";;2;1;Grzegorz Huba;;9;5
-2023-06-18 09:30;Warszawski Turniej Ogniem i Mieczem;20;"Adam ""AdamK"" Krysiak";;12;6;Daniel Lesiewicz;;0;0
-2023-06-18 12:00;Warszawski Turniej Ogniem i Mieczem;20;Grzegorz Huba;;3;2;"Kamil ""miszczu"" Jasak";;6;4
-2023-06-18 12:00;Warszawski Turniej Ogniem i Mieczem;20;"Lukasz ""Kędzi"" Kędziora";;4;3;"Cezary ""Cezar"" Młotek";;4;3
-2023-06-18 12:00;Warszawski Turniej Ogniem i Mieczem;20;Radosław Struzik;;1;0;"Krzysiek ""Kysiek"" Dąbkowski";;12;6
-2023-06-18 12:00;Warszawski Turniej Ogniem i Mieczem;20;"Łukasz ""QUAR"" Ceniak";;11;5;Sławomir Porębski;;1;1
-2023-06-18 12:00;Warszawski Turniej Ogniem i Mieczem;20;"Adam ""AdamK"" Krysiak";;12;5;"Adam ""Wasil"" Wasilewski";;2;1
-2023-06-18 12:00;Warszawski Turniej Ogniem i Mieczem;20;"Piotr ""P."" Miazga";;12;5;Aleksander Gados;;5;1
-2023-06-18 12:00;Warszawski Turniej Ogniem i Mieczem;20;"Arkadiusz ""ArekS"" Stamm";;11;5;Daniel Lesiewicz;;4;1
-2023-06-18 12:00;Warszawski Turniej Ogniem i Mieczem;20;"Mikołaj ""Batura"" Bieńkowski";;1;0;"Michał ""Raven"" Rapacz";;12;6
-2023-06-18 15:00;Warszawski Turniej Ogniem i Mieczem;20;Daniel Lesiewicz;;0;0;Sławomir Porębski;;12;6
-2023-06-18 15:00;Warszawski Turniej Ogniem i Mieczem;20;"Adam ""AdamK"" Krysiak";;3;2;"Michał ""Raven"" Rapacz";;5;4
-2023-06-18 15:00;Warszawski Turniej Ogniem i Mieczem;20;"Mikołaj ""Batura"" Bieńkowski";;3;3;"Arkadiusz ""ArekS"" Stamm";;4;3
-2023-06-18 15:00;Warszawski Turniej Ogniem i Mieczem;20;"Piotr ""P."" Miazga";;4;2;"Kamil ""miszczu"" Jasak";;6;4
-2023-06-18 15:00;Warszawski Turniej Ogniem i Mieczem;20;"Łukasz ""QUAR"" Ceniak";;12;5;"Lukasz ""Kędzi"" Kędziora";;5;1
-2023-06-18 15:00;Warszawski Turniej Ogniem i Mieczem;20;"Adam ""Wasil"" Wasilewski";;12;6;Grzegorz Huba;;1;0
-2023-06-18 15:00;Warszawski Turniej Ogniem i Mieczem;20;"Cezary ""Cezar"" Młotek";;8;4;Radosław Struzik;;5;2
-2023-06-18 15:00;Warszawski Turniej Ogniem i Mieczem;20;Aleksander Gados;;12;6;"Krzysiek ""Kysiek"" Dąbkowski";;0;0
+﻿Datetime;Tournament;TournamentRank;ScoringType;Player1;Army1;VictoryPoints1;TournamentPoints1;Player2;Army2;VictoryPoints2;TournamentPoints2
+2023-06-18 09:30;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;Aleksander Gados;;12;6;"Arkadiusz ""ArekS"" Stamm";;0;0
+2023-06-18 09:30;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Łukasz ""QUAR"" Ceniak";;0;0;"Piotr ""P."" Miazga";;12;6
+2023-06-18 09:30;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Adam ""Wasil"" Wasilewski";;12;6;Sławomir Porębski;;0;0
+2023-06-18 09:30;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Mikołaj ""Batura"" Bieńkowski";;12;5;"Krzysiek ""Kysiek"" Dąbkowski";;2;1
+2023-06-18 09:30;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Michał ""Raven"" Rapacz";;12;5;"Cezary ""Cezar"" Młotek";;2;1
+2023-06-18 09:30;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Kamil ""miszczu"" Jasak";;6;4;Radosław Struzik;;3;2
+2023-06-18 09:30;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Lukasz ""Kędzi"" Kędziora";;2;1;Grzegorz Huba;;9;5
+2023-06-18 09:30;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Adam ""AdamK"" Krysiak";;12;6;Daniel Lesiewicz;;0;0
+2023-06-18 12:00;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;Grzegorz Huba;;3;2;"Kamil ""miszczu"" Jasak";;6;4
+2023-06-18 12:00;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Lukasz ""Kędzi"" Kędziora";;4;3;"Cezary ""Cezar"" Młotek";;4;3
+2023-06-18 12:00;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;Radosław Struzik;;1;0;"Krzysiek ""Kysiek"" Dąbkowski";;12;6
+2023-06-18 12:00;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Łukasz ""QUAR"" Ceniak";;11;5;Sławomir Porębski;;1;1
+2023-06-18 12:00;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Adam ""AdamK"" Krysiak";;12;5;"Adam ""Wasil"" Wasilewski";;2;1
+2023-06-18 12:00;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Piotr ""P."" Miazga";;12;5;Aleksander Gados;;5;1
+2023-06-18 12:00;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Arkadiusz ""ArekS"" Stamm";;11;5;Daniel Lesiewicz;;4;1
+2023-06-18 12:00;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Mikołaj ""Batura"" Bieńkowski";;1;0;"Michał ""Raven"" Rapacz";;12;6
+2023-06-18 15:00;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;Daniel Lesiewicz;;0;0;Sławomir Porębski;;12;6
+2023-06-18 15:00;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Adam ""AdamK"" Krysiak";;3;2;"Michał ""Raven"" Rapacz";;5;4
+2023-06-18 15:00;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Mikołaj ""Batura"" Bieńkowski";;3;3;"Arkadiusz ""ArekS"" Stamm";;4;3
+2023-06-18 15:00;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Piotr ""P."" Miazga";;4;2;"Kamil ""miszczu"" Jasak";;6;4
+2023-06-18 15:00;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Łukasz ""QUAR"" Ceniak";;12;5;"Lukasz ""Kędzi"" Kędziora";;5;1
+2023-06-18 15:00;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Adam ""Wasil"" Wasilewski";;12;6;Grzegorz Huba;;1;0
+2023-06-18 15:00;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;"Cezary ""Cezar"" Młotek";;8;4;Radosław Struzik;;5;2
+2023-06-18 15:00;Warszawski Turniej Ogniem i Mieczem;20;7LEVELS_BOOST;Aleksander Gados;;12;6;"Krzysiek ""Kysiek"" Dąbkowski";;0;0

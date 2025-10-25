@@ -61,10 +61,10 @@ def load_scores(scores_file: Path) -> List[score.Score]:
                 s.setVictoryPoints2(row['VictoryPoints2'])
                 s.setTournamentPoints2(row['TournamentPoints2'])
                 
-                if 'ScoreType' in row and row['ScoreType'][0] == '7':
-                    s.setScoreType(score.SCORE_7LEVELS)
+                if 'ScoringType' in row and row['ScoringType'] == '7LEVELS_BIG':
+                    s.setScoringType(score.SCORE_7LEVELS_BIG)
                 else:
-                    s.setScoreType(score.SCORE_3LEVELS)
+                    s.setScoringType(score.SCORE_STANDARD)
                 
                 scores.append(s)
 
