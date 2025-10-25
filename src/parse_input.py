@@ -3,9 +3,9 @@ import csv
 import sys
 from pathlib import Path
 import logging
-from src.score import Score
+import src.score as score
 
-def load_all(scores_folder: Path) -> List[Score]:
+def load_all(scores_folder: Path) -> List[score.Score]:
     scores = []
 
     if not isinstance(scores_folder, Path):
@@ -22,7 +22,7 @@ def load_all(scores_folder: Path) -> List[Score]:
 
     return scores
 
-def load_scores(scores_file: Path) -> List[Score]:
+def load_scores(scores_file: Path) -> List[score.Score]:
 
     encoding = 'utf-8-sig';
     delimiter = ';';
@@ -42,18 +42,30 @@ def load_scores(scores_file: Path) -> List[Score]:
         with scores_file.open("r", encoding=encoding, newline="") as f:
             reader = csv.DictReader(f, delimiter=delimiter)
             for row_number, row in enumerate(reader, start=1):
-                s = Score()
+                s = score.Score()
                 s.setDatetime(row['Datetime'])
                 s.setTournament(row['Tournament'])
                 s.setTournamentRank(row['TournamentRank'])
                 s.setPlayer1(row['Player1'])
-                s.setArmy1(row['Army1'])
+
+                if 'Army1' in row:
+                    s.setArmy1(row['Army1'])
+                
                 s.setVictoryPoints1(row['VictoryPoints1'])
                 s.setTournamentPoints1(row['TournamentPoints1'])
                 s.setPlayer2(row['Player2'])
-                s.setArmy2(row['Army2'])
+                
+                if 'Army2' in row:
+                    s.setArmy2(row['Army2'])
+                
                 s.setVictoryPoints2(row['VictoryPoints2'])
                 s.setTournamentPoints2(row['TournamentPoints2'])
+                
+                if 'ScoreType' in row and row['ScoreType'][0] == '7':
+                    s.setScoreType(score.SCORE_7LEVELS)
+                else:
+                    s.setScoreType(score.SCORE_3LEVELS)
+                
                 scores.append(s)
 
     except UnicodeDecodeError:
