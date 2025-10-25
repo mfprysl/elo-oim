@@ -21,4 +21,4 @@ class Test_ParseInput(unittest.TestCase):
         self.assertEqual(scores[2].__str__(),'2025-07-07 13:00:00 Pola Chabrów 2025 (30) | Krashan Bhamaradżanga (Kozacy) : Hans Gonschorek (Tatarzy) | 0 (7) : 3 (8), standard scoring')
         self.assertEqual(scores[3].__str__(),'2025-07-07 13:00:00 Pola Chabrów 2025 (30) | Zenon Kuśmider (Korona) : Stanisław Krokodyl (Korona) | 3 (14) : 0 (4), standard scoring')
         self.assertEqual(scores[4].__str__(),'2025-08-01 09:00:00 Bitka o Jabłko 2025 (20) | Hans Gonschorek (Tatarzy) : Stanisław Krokodyl (Korona) | 3 (18) : 0 (0), standard scoring')
-        self.assertEqual(scores[5].__str__(),'2025-09-01 09:00:00 Jesienne Harce 2025 (20) | Zdzisław Mroczkowski (Litwa) : Marian Ceglarek (Kozacy) | 2 (3) : 6 (4), 7 levels big')
+        self.assertEqual(scores[5].__str__(),'2025-09-01 09:00:00 Jesienne Harce 2025 (20) | Zdzisław Mroczkowski (Litwa) : Marian Ceglarek (Kozacy) | 2 (3) : 6 (4), scoring 7LEVELS_BIG')

@@ -1,6 +1,5 @@
 import unittest
-from src.score import Score
-import src.score as score
+from src.score import Score, Score7LevelsBig
 import src.calculate_ranks
 
 class Test_CalculateRanks(unittest.TestCase):
@@ -43,11 +42,10 @@ class Test_CalculateRanks(unittest.TestCase):
 
         r = {}
         scores = []
-        s1 = Score()
+        s1 = Score7LevelsBig()
         s1.setArmy1('a1').setArmy2('a2').setPlayer1('p1').setPlayer2('p2')
         s1.setDatetime('2009-10-08 11:00').setTournament('t')
         s1.setVictoryPoints1(6).setVictoryPoints2(3).setTournamentPoints1(4).setTournamentPoints2(2)
-        s1.setScoringType(score.SCORE_7LEVELS_BIG)
         scores.append(s1)
         src.calculate_ranks.calculate_ranks(scores, r)
         self.assertEqual(round(r['p1'],2),1007.80)

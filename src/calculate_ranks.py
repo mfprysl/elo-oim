@@ -12,11 +12,7 @@ def adjust_rank_by_score(s: Score, ranking:Dict[str,float]):
     P1_previous_rank = 1000 if not s.Player1 in ranking else ranking[s.Player1]
     P2_previous_rank = 1000 if not s.Player2 in ranking else ranking[s.Player2]
 
-    scoring_type = score.ScoringTypeStandard()
-    if s.ScoringType == score.SCORE_7LEVELS_BIG:
-        scoring_type = score.ScoringType7LevelsBig()
-
-    [P1_score,P2_score] = scoring_type.getScore(s)
+    [P1_score,P2_score] = s.getScore()
 
     result_rank = s.TournamentRank + 2.0 * abs(s.VictoryPoints1 - s.VictoryPoints2)
 

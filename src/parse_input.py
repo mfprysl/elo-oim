@@ -42,7 +42,10 @@ def load_scores(scores_file: Path) -> List[score.Score]:
         with scores_file.open("r", encoding=encoding, newline="") as f:
             reader = csv.DictReader(f, delimiter=delimiter)
             for row_number, row in enumerate(reader, start=1):
-                s = score.Score()
+                if 'ScoringType' in row and row['ScoringType'] == '7LEVELS_BIG':
+                    s = score.Score7LevelsBig()
+                else:
+                    s = score.Score()
                 s.setDatetime(row['Datetime'])
                 s.setTournament(row['Tournament'])
                 s.setTournamentRank(row['TournamentRank'])
@@ -60,12 +63,7 @@ def load_scores(scores_file: Path) -> List[score.Score]:
                 
                 s.setVictoryPoints2(row['VictoryPoints2'])
                 s.setTournamentPoints2(row['TournamentPoints2'])
-                
-                if 'ScoringType' in row and row['ScoringType'] == '7LEVELS_BIG':
-                    s.setScoringType(score.SCORE_7LEVELS_BIG)
-                else:
-                    s.setScoringType(score.SCORE_STANDARD)
-                
+                                
                 scores.append(s)
 
     except UnicodeDecodeError:
