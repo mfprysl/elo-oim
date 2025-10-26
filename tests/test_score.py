@@ -1,5 +1,6 @@
 import unittest
 import src.score as score
+import src.master_data as mdm
 
 class Test_Score(unittest.TestCase):
 
@@ -13,7 +14,7 @@ class Test_Score(unittest.TestCase):
             "Player1": "Dżordż Łazienkowski",
             "Army1": "A1",
             "VictoryPoints1": 6,
-            "TournamentPoints1": 0,
+            "TournamentPoints1": "you're a failure",
             "Player2": "Zygmund Snæfellsjökull",
             "Army2": "A2",
             "VictoryPoints2": 7,
@@ -45,6 +46,19 @@ class Test_Score(unittest.TestCase):
         s.setVictoryPoints1(4).setVictoryPoints2(2).setTournamentPoints1(3).setTournamentPoints2(1)
         self.assertEqual(s.__str__(),
             '2009-10-08 11:00:00 t (30) | p1 (a1) : p2 (a2) | 3 (4) : 1 (2), standard scoring')
+        self.assertEqual(s.Player1NaturalKey,'p1')
+        self.assertEqual(s.Player2NaturalKey,'p2')
+        
+    def test_ScoreHarmonization(self):
+        s = score.Score()
+        myMDM = mdm.MasterDataDict()
+        myMDM.addKey('T','P1','Player1')
+        myMDM.addKey('T','P2','Player2')
+        s.harmonizePlayers(myMDM)
+        self.assertEqual(s.Player1,'Player1')
+        self.assertEqual(s.Player2,'Player2')
+        self.assertEqual(s.Player1NaturalKey,'P1')
+        self.assertEqual(s.Player2NaturalKey,'P2')
 
     def test_SetUpScore7LevelsBig(self):
 

@@ -6,7 +6,8 @@ import logging
 
 logging.basicConfig(level=logging.INFO, format='\t%(message)s')
 
-scores_folder = "data"
+scores_folder = "data/Facts"
+player_master_data_file = "data/MasterData/player.csv"
 
 print("Elo OiM!")
 scores = parse_input.load_all(scores_folder)

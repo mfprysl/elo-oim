@@ -3,6 +3,7 @@ import logging
 from src.score import Score
 import src.score as score
 from typing import List, Dict
+import src.master_data as mdm
 
 def sort_scores(scores: List[Score]) -> List[Score]:
     scores.sort(key=lambda s: s.Datetime)
