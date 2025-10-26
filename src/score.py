@@ -8,29 +8,31 @@ SCORE_7LEVELS_SMALL = 2 # 1/0.65/0.6/0.5/0.4/0.35/0
 SCORE_5LEVELS_SMALL = 3 # 1/0.6/0.5/0.4/0
 
 class Score:
-    Datetime = datetime.fromisoformat('1974-07-07 12:00')
-    Tournament = 'T'
-    TournamentRank = 20
-    Player1 = 'P1'
-    Player1NaturalKey = 'P1'
-    Army1 = ''
-    VictoryPoints1 = 0
-    TournamentPoints1 = 0
-    Player2 = 'P2'
-    Player2NaturalKey = 'P2'
-    Army2 = ''
-    VictoryPoints2 = 0
-    TournamentPoints2 = 0
     ScoringType = SCORE_STANDARD
     ScoringTypeStr = 'standard scoring'
 
+    def __init__(self):
+        self.Datetime = datetime.fromisoformat('1974-07-07 12:00')
+        self.Tournament = 'T'
+        self.TournamentRank = 20
+        self.Player1 = 'P1'
+        self.Player1NaturalKey = 'P1'
+        self.Army1 = ''
+        self.VictoryPoints1 = 0
+        self.TournamentPoints1 = 0
+        self.Player2 = 'P2'
+        self.Player2NaturalKey = 'P2'
+        self.Army2 = ''
+        self.VictoryPoints2 = 0
+        self.TournamentPoints2 = 0
+
     def harmonizePlayers(self,playerDict: mdm.MasterDataDict):
         _p1 = playerDict.getGoldenKey(self.Tournament,self.Player1)
-        if _p1 is not '':
+        if _p1 != '':
             self.Player1 = _p1
 
         _p2 = playerDict.getGoldenKey(self.Tournament,self.Player2)
-        if _p2 is not '':
+        if _p2 != '':
             self.Player2 = _p2
 
     def __str__(self):
