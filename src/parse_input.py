@@ -4,8 +4,9 @@ import sys
 from pathlib import Path
 import logging
 import src.score as score
+import src.master_data as mdm
 
-def load_all(scores_folder: Path) -> List[score.Score]:
+def load_all_scores(scores_folder: Path) -> List[score.Score]:
     scores = []
 
     if not isinstance(scores_folder, Path):
@@ -45,8 +46,12 @@ def load_scores(scores_file: Path) -> List[score.Score]:
             reader = csv.DictReader(f, delimiter=delimiter)
             for row_number, row in enumerate(reader, start=1):
 
-                s = scoreFactory.getScore(row)
-                scores.append(s)
+                if 'Datetime' in row and 'Tournament' in row and 'Player1' in row and 'Player2' in row:
+                    s = scoreFactory.getScore(row)
+                    scores.append(s)
+                else:
+                    logging.info('Skipping ' + str(scores_file.resolve()) + ', no relevant data found ...')
+                    break 
 
     except UnicodeDecodeError:
         logging.error(f"Error: could not decode file using encoding '{encoding}'.")
@@ -57,3 +62,28 @@ def load_scores(scores_file: Path) -> List[score.Score]:
 
     return scores
 
+def load_master_data(mdmDict: mdm.MasterDataDict, mdm_file: Path):
+    encoding = 'utf-8-sig';
+    delimiter = ';';
+
+    if not isinstance(mdm_file, Path):
+        mdm_file = Path(mdm_file)
+
+    logging.info('Reading ' + str(mdm_file.resolve()) + ' ...')
+
+    if not mdm_file.exists():
+        logging.error(f"Error: file not found: {mdm_file}")
+        sys.exit(1)
+    
+    try:
+        with mdm_file.open("r", encoding=encoding, newline="") as f:
+            reader = csv.DictReader(f, delimiter=delimiter)
+            for row_number, row in enumerate(reader, start=1):
+                mdmDict.addKey(row['DataProvider'],row['NaturalKey'],row['GoldenKey'])
+
+    except UnicodeDecodeError:
+        logging.error(f"Error: could not decode file using encoding '{encoding}'.")
+        sys.exit(2)
+    except csv.Error as e:
+        logging.error(f"CSV parsing error: {e}")
+        sys.exit(3)
