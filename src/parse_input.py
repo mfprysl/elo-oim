@@ -54,7 +54,7 @@ def load_scores(scores_file: Path) -> List[score.Score]:
                     else:
                         scores.append(s)
                 else:
-                    logging.info('Skipping ' + str(scores_file.resolve()) + ', no relevant data found ...')
+                    logging.info('Skipping rows in ' + str(scores_file.resolve()) + ', no relevant data found ...')
                     break 
 
     except UnicodeDecodeError:
