@@ -244,6 +244,14 @@ class Score5LevelsSmall(Score):
 
 class ScoreFactory:
     def getScore(self, row: Dict) -> Score:
+
+        try:
+            myDatetime = datetime.fromisoformat(row['Datetime'])
+        except ValueError:
+            raise ValueError("Wrong datetime format (must be ISO)")
+        except KeyError:
+            raise ValueError("No valid 'Datetime' column found (must be ISO)")
+
         if 'ScoringType' in row and row['ScoringType'] == '7LEVELS_BIG':
             s = Score7LevelsBig()
         elif 'ScoringType' in row and row['ScoringType'] == '7LEVELS_SMALL':
@@ -253,7 +261,7 @@ class ScoreFactory:
         else:
             s = Score()
 
-        s.setDatetime(row['Datetime'])
+        s.setDatetime(myDatetime)
         s.setTournament(row['Tournament'])
         s.setTournamentRank(row['TournamentRank'])
         s.setPlayer1(row['Player1'])

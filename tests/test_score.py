@@ -36,6 +36,9 @@ class Test_Score(unittest.TestCase):
         s = f.getScore(sampleData)
         self.assertEqual(s.__str__(),'2009-10-08 11:00:00 Balatonfűzfő 2004 (30) | Dżordż Łazienkowski (A1) : Zygmund Snæfellsjökull (A2) | 0 (6) : 3 (7), scoring 5LEVELS_SMALL')
 
+        with self.assertRaises(ValueError):
+            s = f.getScore({'': ''})
+
     def test_SetUpScore(self):
 
         s = score.Score()

@@ -36,7 +36,7 @@ def load_scores(scores_file: Path) -> List[score.Score]:
     logging.info('Reading ' + str(scores_file.resolve()) + ' ...')
 
     if not scores_file.exists():
-        logging.error(f"Error: file not found: {scores_file}")
+        logging.error(f"File not found: {scores_file}")
         sys.exit(1)
 
     scoreFactory = score.ScoreFactory()
@@ -46,15 +46,19 @@ def load_scores(scores_file: Path) -> List[score.Score]:
             reader = csv.DictReader(f, delimiter=delimiter)
             for row_number, row in enumerate(reader, start=1):
 
-                if 'Datetime' in row and 'Tournament' in row and 'Player1' in row and 'Player2' in row:
-                    s = scoreFactory.getScore(row)
-                    scores.append(s)
+                if 'Datetime' in row and 'Tournament' in row and 'Player1' in row and 'Player2' in row and row['Datetime'] != '' and row['Player1'] != '' and row['Player2'] != '':
+                    try:
+                        s = scoreFactory.getScore(row)
+                    except ValueError:
+                        logging.warning(f"Malformed data in: {scores_file}")
+                    else:
+                        scores.append(s)
                 else:
                     logging.info('Skipping ' + str(scores_file.resolve()) + ', no relevant data found ...')
                     break 
 
     except UnicodeDecodeError:
-        logging.error(f"Error: could not decode file using encoding '{encoding}'.")
+        logging.error(f"Could not decode file using encoding '{encoding}'.")
         sys.exit(2)
     except csv.Error as e:
         logging.error(f"CSV parsing error: {e}")
