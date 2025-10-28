@@ -10,6 +10,7 @@ SCORE_5LEVELS_SMALL = 3 # 1/0.6/0.5/0.4/0
 class Score:
     ScoringType = SCORE_STANDARD
     ScoringTypeStr = 'standard scoring'
+    ScoringTypeCode = 'STANDARD'
 
     def __init__(self):
         self.Datetime = datetime.fromisoformat('1974-07-07 12:00')
@@ -57,6 +58,23 @@ class Score:
                 f" : {self.TournamentPoints2} ({self.VictoryPoints2})"
                 f", {self.ScoringTypeStr}"
                 )
+
+    def getAsDict(self, playerNaturalKey = False):
+        d = {}
+        d['Datetime']=self.Datetime
+        d['Tournament']=self.Tournament
+        d['TournamentRank']=self.TournamentRank
+        d['Player1']=self.Player1 if not playerNaturalKey == True else self.Player1NaturalKey
+        d['VictoryPoints1']=self.VictoryPoints1
+        d['TournamentPoints1']=self.TournamentPoints1
+        d['TournamentPoints2']=self.TournamentPoints2
+        d['VictoryPoints2']=self.VictoryPoints2
+        d['Player2']=self.Player2 if not playerNaturalKey == True else self.Player2NaturalKey
+        d['Army1']=self.Army1
+        d['Army2']=self.Army2
+        d['ScoringType']=self.ScoringTypeCode
+
+        return d
 
     def setDatetime(self, value):
         if isinstance(value, datetime):
@@ -138,37 +156,7 @@ class Score:
 class Score7LevelsBig(Score):
     ScoringType = SCORE_7LEVELS_BIG
     ScoringTypeStr = 'scoring 7LEVELS_BIG'
-
-    def getScore(self) -> Tuple[int, int]:
-        diff = self.VictoryPoints1 - self.VictoryPoints2
-
-        if diff >= 11:
-            P1_score = 1.0
-            P2_score = 0.0
-        elif diff >= 6:
-            P1_score = 0.9
-            P2_score = 0.1
-        elif diff >= 2:
-            P1_score = 0.8
-            P2_score = 0.2
-        elif diff >= -1:
-            P1_score = 0.5
-            P2_score = 0.5
-        elif diff >= -5:
-            P1_score = 0.2
-            P2_score = 0.8
-        elif diff >= -10:
-            P1_score = 0.1
-            P2_score = 0.9
-        else:
-            P1_score = 0.0
-            P2_score = 1.0
-
-        return [P1_score, P2_score]
-
-class Score7LevelsBig(Score):
-    ScoringType = SCORE_7LEVELS_BIG
-    ScoringTypeStr = 'scoring 7LEVELS_BIG'
+    ScoringTypeCode = '7LEVELS_BIG'
 
     def getScore(self) -> Tuple[int, int]:
         diff = self.VictoryPoints1 - self.VictoryPoints2
@@ -200,6 +188,7 @@ class Score7LevelsBig(Score):
 class Score7LevelsSmall(Score):
     ScoringType = SCORE_7LEVELS_SMALL
     ScoringTypeStr = 'scoring 7LEVELS_SMALL'
+    ScoringTypeCode = '7LEVELS_SMALL'
 
     def getScore(self) -> Tuple[int, int]:
         diff = self.VictoryPoints1 - self.VictoryPoints2
@@ -231,6 +220,7 @@ class Score7LevelsSmall(Score):
 class Score5LevelsSmall(Score):
     ScoringType = SCORE_5LEVELS_SMALL
     ScoringTypeStr = 'scoring 5LEVELS_SMALL'
+    ScoringTypeCode = '5LEVELS_SMALL'
 
     def getScore(self) -> Tuple[int, int]:
         diff = self.VictoryPoints1 - self.VictoryPoints2

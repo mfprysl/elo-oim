@@ -1,0 +1,25 @@
+Datetime;Tournament;TournamentRank;Player1;VictoryPoints1;TournamentPoints1;TournamentPoints2;VictoryPoints2;Player2;Army1;Army2;ScoringType
+2023-06-18 09:30:00;Warszawski Turniej Ogniem i Mieczem;20;Aleksander Gados;12;6;0;0;"Arkadiusz ""ArekS"" Stamm";Rzeczpospolita Obojga Narodów;Kozacy;STANDARD
+2023-06-18 09:30:00;Warszawski Turniej Ogniem i Mieczem;20;"Łukasz ""QUAR"" Ceniak";0;0;6;12;"Piotr ""P."" Miazga";Rzeczpospolita Obojga Narodów;;STANDARD
+2023-06-18 09:30:00;Warszawski Turniej Ogniem i Mieczem;20;"Adam ""Wasil"" Wasilewski";12;6;0;0;Sławomir Porębski;Carstwo Moskiewskie;Chanat Krymski;STANDARD
+2023-06-18 09:30:00;Warszawski Turniej Ogniem i Mieczem;20;"Mikołaj ""Batura"" Bieńkowski";12;5;1;2;"Krzysiek ""Kysiek"" Dąbkowski";Siedmiogród;Święte Cesarstwo Rzymskie;STANDARD
+2023-06-18 09:30:00;Warszawski Turniej Ogniem i Mieczem;20;"Michał ""Raven"" Rapacz";12;5;1;2;"Cezary ""Cezar"" Młotek";Chanat Krymski;Chanat Krymski;STANDARD
+2023-06-18 09:30:00;Warszawski Turniej Ogniem i Mieczem;20;"Kamil ""miszczu"" Jasak";6;4;2;3;Radosław Struzik;Królestwo Danii i Norwegii;Święte Cesarstwo Rzymskie;STANDARD
+2023-06-18 09:30:00;Warszawski Turniej Ogniem i Mieczem;20;"Lukasz ""Kędzi"" Kędziora";2;1;5;9;Grzegorz Huba;Rzeczpospolita Obojga Narodów;Królestwo Szwecji;STANDARD
+2023-06-18 09:30:00;Warszawski Turniej Ogniem i Mieczem;20;"Adam ""AdamK"" Krysiak";12;6;0;0;Daniel Lesiewicz;Królestwo Szwecji;;STANDARD
+2023-06-18 12:00:00;Warszawski Turniej Ogniem i Mieczem;20;Grzegorz Huba;3;2;4;6;"Kamil ""miszczu"" Jasak";Królestwo Szwecji;Królestwo Danii i Norwegii;STANDARD
+2023-06-18 12:00:00;Warszawski Turniej Ogniem i Mieczem;20;"Lukasz ""Kędzi"" Kędziora";4;3;3;4;"Cezary ""Cezar"" Młotek";Rzeczpospolita Obojga Narodów;Chanat Krymski;STANDARD
+2023-06-18 12:00:00;Warszawski Turniej Ogniem i Mieczem;20;Radosław Struzik;1;0;6;12;"Krzysiek ""Kysiek"" Dąbkowski";Święte Cesarstwo Rzymskie;Święte Cesarstwo Rzymskie;STANDARD
+2023-06-18 12:00:00;Warszawski Turniej Ogniem i Mieczem;20;"Łukasz ""QUAR"" Ceniak";11;5;1;1;Sławomir Porębski;Rzeczpospolita Obojga Narodów;Chanat Krymski;STANDARD
+2023-06-18 12:00:00;Warszawski Turniej Ogniem i Mieczem;20;"Adam ""AdamK"" Krysiak";12;5;1;2;"Adam ""Wasil"" Wasilewski";Królestwo Szwecji;Carstwo Moskiewskie;STANDARD
+2023-06-18 12:00:00;Warszawski Turniej Ogniem i Mieczem;20;"Piotr ""P."" Miazga";12;5;1;5;Aleksander Gados;;Rzeczpospolita Obojga Narodów;STANDARD
+2023-06-18 12:00:00;Warszawski Turniej Ogniem i Mieczem;20;"Arkadiusz ""ArekS"" Stamm";11;5;1;4;Daniel Lesiewicz;Kozacy;;STANDARD
+2023-06-18 12:00:00;Warszawski Turniej Ogniem i Mieczem;20;"Mikołaj ""Batura"" Bieńkowski";1;0;6;12;"Michał ""Raven"" Rapacz";Siedmiogród;Chanat Krymski;STANDARD
+2023-06-18 15:00:00;Warszawski Turniej Ogniem i Mieczem;20;Daniel Lesiewicz;0;0;6;12;Sławomir Porębski;;Chanat Krymski;STANDARD
+2023-06-18 15:00:00;Warszawski Turniej Ogniem i Mieczem;20;"Adam ""AdamK"" Krysiak";3;2;4;5;"Michał ""Raven"" Rapacz";Królestwo Szwecji;Chanat Krymski;STANDARD
+2023-06-18 15:00:00;Warszawski Turniej Ogniem i Mieczem;20;"Mikołaj ""Batura"" Bieńkowski";3;3;3;4;"Arkadiusz ""ArekS"" Stamm";Siedmiogród;Kozacy;STANDARD
+2023-06-18 15:00:00;Warszawski Turniej Ogniem i Mieczem;20;"Piotr ""P."" Miazga";4;2;4;6;"Kamil ""miszczu"" Jasak";;Królestwo Danii i Norwegii;STANDARD
+2023-06-18 15:00:00;Warszawski Turniej Ogniem i Mieczem;20;"Łukasz ""QUAR"" Ceniak";12;5;1;5;"Lukasz ""Kędzi"" Kędziora";Rzeczpospolita Obojga Narodów;Rzeczpospolita Obojga Narodów;STANDARD
+2023-06-18 15:00:00;Warszawski Turniej Ogniem i Mieczem;20;"Adam ""Wasil"" Wasilewski";12;6;0;1;Grzegorz Huba;Carstwo Moskiewskie;Królestwo Szwecji;STANDARD
+2023-06-18 15:00:00;Warszawski Turniej Ogniem i Mieczem;20;"Cezary ""Cezar"" Młotek";8;4;2;5;Radosław Struzik;Chanat Krymski;Święte Cesarstwo Rzymskie;STANDARD
+2023-06-18 15:00:00;Warszawski Turniej Ogniem i Mieczem;20;Aleksander Gados;12;6;0;0;"Krzysiek ""Kysiek"" Dąbkowski";Rzeczpospolita Obojga Narodów;Święte Cesarstwo Rzymskie;STANDARD

@@ -81,6 +81,19 @@ class Test_Score(unittest.TestCase):
         self.assertEqual(s.TournamentPoints1,1)
         self.assertEqual(s.TournamentPoints2,1)
 
+    def test_ScoreExportDict(self):
+        s = score.Score()
+        myMDM = mdm.MasterDataDict()
+        myMDM.addKey('T','P1','Player1')
+        myMDM.addKey('T','P2','Player2')
+        s.harmonizePlayers(myMDM)
+        sDict = s.getAsDict()
+        self.assertEqual(sDict['Player1'],'Player1')
+        self.assertEqual(sDict['Player2'],'Player2')
+        sDict = s.getAsDict(playerNaturalKey=True)
+        self.assertEqual(sDict['Player1'],'P1')
+        self.assertEqual(sDict['Player2'],'P2')
+
     def test_SetUpScore7LevelsBig(self):
 
         s = score.Score7LevelsBig()
