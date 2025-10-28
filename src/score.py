@@ -35,6 +35,17 @@ class Score:
         if _p2 != '':
             self.Player2 = _p2
 
+    def inferTournamentPoints(self):
+        if self.VictoryPoints1 > self.VictoryPoints2:
+            self.TournamentPoints1 = 3
+            self.TournamentPoints2 = 0
+        elif self.VictoryPoints1 < self.VictoryPoints2:
+            self.TournamentPoints1 = 0
+            self.TournamentPoints2 = 3
+        else:
+            self.TournamentPoints1 = 1
+            self.TournamentPoints2 = 1
+
     def __str__(self):
 
         strArmy1 = '' if self.Army1 == '' else f" ({self.Army1})"
@@ -278,5 +289,8 @@ class ScoreFactory:
         
         s.setVictoryPoints2(row['VictoryPoints2'])
         s.setTournamentPoints2(row['TournamentPoints2'])
+
+        if row['TournamentPoints1'] == 0 or row['TournamentPoints2'] == 0:
+            s.inferTournamentPoints()
 
         return s

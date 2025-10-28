@@ -63,6 +63,24 @@ class Test_Score(unittest.TestCase):
         self.assertEqual(s.Player1NaturalKey,'P1')
         self.assertEqual(s.Player2NaturalKey,'P2')
 
+    def test_ScoreInferTP(self):
+        s = score.Score()
+
+        s.setVictoryPoints1(4).setVictoryPoints2(2)
+        s.inferTournamentPoints()
+        self.assertEqual(s.TournamentPoints1,3)
+        self.assertEqual(s.TournamentPoints2,0)
+
+        s.setVictoryPoints1(1).setVictoryPoints2(8)
+        s.inferTournamentPoints()
+        self.assertEqual(s.TournamentPoints1,0)
+        self.assertEqual(s.TournamentPoints2,3)
+
+        s.setVictoryPoints1(0).setVictoryPoints2(0)
+        s.inferTournamentPoints()
+        self.assertEqual(s.TournamentPoints1,1)
+        self.assertEqual(s.TournamentPoints2,1)
+
     def test_SetUpScore7LevelsBig(self):
 
         s = score.Score7LevelsBig()
