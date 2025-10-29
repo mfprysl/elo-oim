@@ -99,7 +99,7 @@ for f in files_to_process:
 
     for rpf in raw_player_facts:
         new_pf = {'City': rpf['City'], 'Army': rpf['Army']}
-        new_pos = {'Date': event_date, 'Tournament': rpf['Tournament'], 'Position': rpf['D0'],
+        new_pos = {'Date': event_date, 'Tournament': rpf['Tournament'], 'Position': rpf['P'],
                           'Player':rpf['Player'], 'Army': rpf['Army']}
 
         player_facts[rpf['Player']] = new_pf
@@ -108,15 +108,15 @@ for f in files_to_process:
         if rpf['Tournament'] != '': 
             if rpf['Tournament'] not in tournaments:
                 n_rounds = 0
-                if rpf['D4'] != '':
+                if 'T1' in rpf and rpf['T1'] != '':
                     n_rounds = 1
-                if rpf['D7'] != '':
+                if 'T2' in rpf and rpf['T2'] != '':
                     n_rounds = 2
-                if rpf['D10'] != '':
+                if 'T3' in rpf and rpf['T3'] != '':
                     n_rounds = 3
-                if rpf['D13'] != '':
+                if 'T4' in rpf and rpf['T4'] != '':
                     n_rounds = 4
-                if rpf['D16'] != '':
+                if 'T5' in rpf and rpf['T5'] != '':
                     n_rounds = 5
                 tournaments[rpf['Tournament']] = {'Tournament':rpf['Tournament'], 
                     'Date': event_date, 'nRounds':n_rounds, 'nPlayers': 1, 'Rank': 15}

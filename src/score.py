@@ -293,7 +293,7 @@ class ScoreFactory:
         s.setVictoryPoints2(row['VictoryPoints2'])
         s.setTournamentPoints2(row['TournamentPoints2'])
 
-        if row['TournamentPoints1'] == 0 or row['TournamentPoints2'] == 0:
+        if row['TournamentPoints1'] == '' or row['TournamentPoints2'] == '':
             s.inferTournamentPoints()
 
         return s
