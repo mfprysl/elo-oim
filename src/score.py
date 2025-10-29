@@ -19,11 +19,13 @@ class Score:
         self.Player1 = 'P1'
         self.Player1NaturalKey = 'P1'
         self.Army1 = ''
+        self.Army1NaturalKey = ''
         self.VictoryPoints1 = 0
         self.TournamentPoints1 = 0
         self.Player2 = 'P2'
         self.Player2NaturalKey = 'P2'
         self.Army2 = ''
+        self.Army2NaturalKey = ''
         self.VictoryPoints2 = 0
         self.TournamentPoints2 = 0
 
@@ -35,6 +37,15 @@ class Score:
         _p2 = playerDict.getGoldenKey(self.Tournament,self.Player2)
         if _p2 != '':
             self.Player2 = _p2
+
+    def harmonizeArmies(self,armyDict: mdm.MasterDataDict):
+        _a1 = armyDict.getGoldenKey(self.Tournament,self.Army1,anyDataProvider = True)
+        if _a1 != '':
+            self.Army1 = _a1
+
+        _a2 = armyDict.getGoldenKey(self.Tournament,self.Army2,anyDataProvider = True)
+        if _a2 != '':
+            self.Army2 = _a2
 
     def inferTournamentPoints(self):
         if self.VictoryPoints1 > self.VictoryPoints2:
@@ -101,6 +112,7 @@ class Score:
     
     def setArmy1(self, value):
         self.Army1 = value
+        self.Army1NaturalKey = value
         return self
     
     def setVictoryPoints1(self, value):
@@ -124,6 +136,7 @@ class Score:
     
     def setArmy2(self, value):
         self.Army2 = value
+        self.Army2NaturalKey = value
         return self
     
     def setVictoryPoints2(self, value):

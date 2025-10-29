@@ -131,6 +131,12 @@ for f in files_to_process:
             s.setArmy2(player_facts[s.Player2]['Army'])
         tournaments[s.Tournament]['Rank'] = s.TournamentRank
 
+    for s in scores:
+        if s.Army1 == '':
+            logging.error(s.__str__())
+        if s.Army2 == '':
+            logging.error(s.__str__())
+
     pos_file = 'data/Facts/Position/' + f + '_Position.csv'
     with open(pos_file, 'w', newline='') as csvfile:
         logging.info('Writing ' + pos_file + ' ...')

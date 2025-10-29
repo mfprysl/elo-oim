@@ -11,3 +11,5 @@ class Test_MasterData(unittest.TestCase):
         self.assertEqual(myMDM.getGoldenKey('SampleDP','SampleName'),'GoldenName')
         myMDM.addKey('SampleDP','SampleName2','GoldenName2')
         self.assertEqual(myMDM.getGoldenKey('SampleDP','SampleName2'),'GoldenName2')
+        self.assertEqual(myMDM.getGoldenKey('NoDP','SampleName2'),'')
+        self.assertEqual(myMDM.getGoldenKey('NoDP','SampleName2', anyDataProvider=True),'GoldenName2')

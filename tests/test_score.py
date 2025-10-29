@@ -63,6 +63,18 @@ class Test_Score(unittest.TestCase):
         self.assertEqual(s.Player1NaturalKey,'P1')
         self.assertEqual(s.Player2NaturalKey,'P2')
 
+    def test_ArmyHarmonization(self):
+        s = score.Score()
+        s.setArmy1('a1').setArmy2('a2')
+        myMDM = mdm.MasterDataDict()
+        myMDM.addKey('T','a1','Army1')
+        myMDM.addKey('T','a2','Army2')
+        s.harmonizeArmies(myMDM)
+        self.assertEqual(s.Army1,'Army1')
+        self.assertEqual(s.Army2,'Army2')
+        self.assertEqual(s.Army1NaturalKey,'a1')
+        self.assertEqual(s.Army2NaturalKey,'a2')
+
     def test_ScoreInferTP(self):
         s = score.Score()
 
