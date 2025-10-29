@@ -7,7 +7,7 @@ import src.master_data as mdm
 
 logging.basicConfig(level=logging.INFO, format='\t%(message)s')
 
-scores_folder = "data/Facts"
+scores_folder = "data/Facts/Score"
 player_master_data_file = "data/MasterData/player.csv"
 
 print("Elo OiM!")

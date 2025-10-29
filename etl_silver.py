@@ -86,14 +86,42 @@ print("Combining data for Elo OiM from several files!")
 playerMDM = mdm.MasterDataDict()
 parse_input.load_master_data(playerMDM, player_master_data_file)
 
+tournaments = {}
+
 for f in files_to_process:
-    print(f)
+    event_date = f[0:10].replace('_','-')
+    logging.info(f"Event date: {event_date}")
 
     scores = parse_input.load_scores('data/Raw/Scores/' + f + '.csv')
     raw_player_facts = load_player_facts('data/Raw/Players/' + f + '_Players.csv')
     player_facts = {}
+    positions = []
+
     for rpf in raw_player_facts:
-        player_facts[rpf['Player']]={'City': rpf['City'], 'Army': rpf['Army']}
+        new_pf = {'City': rpf['City'], 'Army': rpf['Army']}
+        new_pos = {'Date': event_date, 'Tournament': rpf['Tournament'], 'Position': rpf['D0'],
+                          'Player':rpf['Player'], 'Army': rpf['Army']}
+
+        player_facts[rpf['Player']] = new_pf
+        positions.append(new_pos)
+
+        if rpf['Tournament'] != '': 
+            if rpf['Tournament'] not in tournaments:
+                n_rounds = 0
+                if rpf['D4'] != '':
+                    n_rounds = 1
+                if rpf['D7'] != '':
+                    n_rounds = 2
+                if rpf['D10'] != '':
+                    n_rounds = 3
+                if rpf['D13'] != '':
+                    n_rounds = 4
+                if rpf['D16'] != '':
+                    n_rounds = 5
+                tournaments[rpf['Tournament']] = {'Tournament':rpf['Tournament'], 
+                    'Date': event_date, 'nRounds':n_rounds, 'nPlayers': 1, 'Rank': 15}
+            else:
+                tournaments[rpf['Tournament']]['nPlayers'] = tournaments[rpf['Tournament']]['nPlayers'] + 1
 
     for s in scores:
         s.harmonizePlayers(playerMDM)
@@ -101,8 +129,19 @@ for f in files_to_process:
             s.setArmy1(player_facts[s.Player1]['Army'])
         if s.Player2 in player_facts:
             s.setArmy2(player_facts[s.Player2]['Army'])
+        tournaments[s.Tournament]['Rank'] = s.TournamentRank
 
-    out_file = 'data/Facts/' + f + '.csv'
+    pos_file = 'data/Facts/Position/' + f + '_Position.csv'
+    with open(pos_file, 'w', newline='') as csvfile:
+        logging.info('Writing ' + pos_file + ' ...')
+        fieldnames = ['Date', 'Tournament', 'Position', 'Player', 'Army']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
+
+        writer.writeheader()
+        for p in positions:
+            writer.writerow(p)
+    
+    out_file = 'data/Facts/Score/' + f + '.csv'
     with open(out_file, 'w', newline='') as csvfile:
         logging.info('Writing ' + out_file + ' ...')
         fieldnames = ['Datetime','Tournament','TournamentRank','Player1','VictoryPoints1',
@@ -113,3 +152,14 @@ for f in files_to_process:
         writer.writeheader()
         for s in scores:
             writer.writerow(s.getAsDict(playerNaturalKey=True))
+
+t_file = 'data/Facts/Tournament.csv'
+with open(t_file, 'w', newline='') as csvfile:
+    logging.info('Writing ' + t_file + ' ...')
+    fieldnames = ['Date','Tournament','Rank','nRounds','nPlayers']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
+
+    writer.writeheader()
+    for t in list(tournaments.values()):
+        writer.writerow(t)
+
