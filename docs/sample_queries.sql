@@ -13,11 +13,19 @@ WITH
          "VictoryPoints1" as "OVP", "TournamentPoints1" as "OTP"
       FROM "Score"
       ),
-   ArmyScore as (
-      SELECT * FROM A1 UNION ALL SELECT * FROM A2
+   AA as (SELECT * FROM A1 UNION ALL SELECT * FROM A2),
+   ArmyScore as(
+      SELECT *,
+         CASE
+            WHEN "TP">"OTP" THEN 'Win'
+            WHEN "TP"<"OTP" THEN 'Loss'
+            ELSE 'Draw'
+         END as "Result"
+      FROM AA
       ),
+      
    Wins as (
-      SELECT "Army", COUNT(*) as "Wins" FROM ArmyScore WHERE "TP">"OTP" GROUP BY "Army"
+      SELECT "Army", COUNT(*) as "Wins" FROM ArmyScore WHERE "Result" = 'Win' GROUP BY "Army"
       ),
    Games as (
       SELECT "Army", COUNT(*) as "Games" FROM ArmyScore GROUP BY "Army"
