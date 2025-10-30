@@ -19,7 +19,7 @@ files_to_process = [
     '2024_02_10_M2_Krakow',
     '2024_05_11_M3_Krakow',
     '2024_06_15_BoW1',
-    '2024_06_15_Pyra1',
+    '2024_06_16_Pyra1',
     '2024_07_28_Pyra2',
     '2024_08_17_Maraton_Warszawa',
     '2024_09_07_Kapitularz',

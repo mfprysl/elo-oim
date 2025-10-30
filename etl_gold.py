@@ -3,6 +3,7 @@ import logging
 from src.score import Score
 import src.parse_input as parse_input
 import src.master_data as mdm
+import src.calculate_ranks as calculate_ranks
 from typing import List, Dict
 import csv
 import sys
@@ -105,6 +106,20 @@ for p in positions:
     p['Army'] = armyMDM.getGoldenKey(p['Tournament'],p['Army'],anyDataProvider=True)
 
 tournaments = load_tournaments(tournaments_file)
+
+ranking = {}
+last_game = calculate_ranks.calculate_ranks(scores, ranking)
+sorted_ranking = sorted(ranking.items(), key=lambda kv: kv[1], reverse=True)
+
+e_file = f"data/Gold/Elo_{last_game.year}_{last_game.month}_{last_game.day}.csv"
+with open(e_file, 'w', newline='') as csvfile:
+    logging.info('Writing ' + e_file + ' ...')
+    fieldnames = ['Player','Rank']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=',')
+
+    writer.writeheader()
+    for r in sorted_ranking:
+        writer.writerow({'Player':r[0],'Rank':r[1]})
 
 t_file = 'data/Gold/Tournament.csv'
 with open(t_file, 'w', newline='') as csvfile:

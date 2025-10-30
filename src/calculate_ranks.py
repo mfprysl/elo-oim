@@ -26,8 +26,10 @@ def adjust_rank_by_score(s: Score, ranking:Dict[str,float]):
     ranking[s.Player1] = P1_new_rank
     ranking[s.Player2] = P2_new_rank
 
-def calculate_ranks(scores: List[Score],ranking:Dict[str,float]) -> Dict[str,float]:
+def calculate_ranks(scores: List[Score],ranking:Dict[str,float]) -> datetime:
+    max_datetime = datetime.fromisoformat('1900-01-01 00:00')
     sort_scores(scores)
     for s in scores:
         adjust_rank_by_score(s, ranking)
-    return ranking
+        max_datetime = s.Datetime
+    return max_datetime

@@ -21,8 +21,9 @@ for s in scores:
     s.harmonizePlayers(playerMDM)
 
 ranking = {}
-calculate_ranks.calculate_ranks(scores, ranking)
+last_date = calculate_ranks.calculate_ranks(scores, ranking)
 
+print(f"\nLast game started: {last_date}\n")
 sorted_ranking = sorted(ranking.items(), key=lambda kv: kv[1], reverse=True)
 for i, p in enumerate(sorted_ranking, start=1):
     print(f"{i}. {p[0]}: {p[1]:.2f}")
