@@ -16,6 +16,7 @@ class Score:
         self.Datetime = datetime.fromisoformat('1974-07-07 12:00')
         self.Tournament = 'T'
         self.TournamentRank = 20
+        self.GameFormat = ''
         self.Player1 = 'P1'
         self.Player1NaturalKey = 'P1'
         self.Army1 = ''
@@ -75,6 +76,7 @@ class Score:
         d['Datetime']=self.Datetime
         d['Tournament']=self.Tournament
         d['TournamentRank']=self.TournamentRank
+        d['GameFormat']=self.GameFormat
         d['Player1']=self.Player1 if not playerNaturalKey == True else self.Player1NaturalKey
         d['VictoryPoints1']=self.VictoryPoints1
         d['TournamentPoints1']=self.TournamentPoints1
@@ -103,6 +105,10 @@ class Score:
             self.TournamentRank = int(value)
         except ValueError:
             self.TournamentRank = 0
+        return self
+    
+    def setGameFormat(self, value):
+        self.GameFormat = value
         return self
     
     def setPlayer1(self, value):
@@ -278,6 +284,7 @@ class ScoreFactory:
         s.setDatetime(myDatetime)
         s.setTournament(row['Tournament'])
         s.setTournamentRank(row['TournamentRank'])
+        s.setGameFormat(row['GameFormat'])
         s.setPlayer1(row['Player1'])
 
         if 'Army1' in row:

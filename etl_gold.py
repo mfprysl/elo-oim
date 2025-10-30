@@ -109,7 +109,7 @@ tournaments = load_tournaments(tournaments_file)
 t_file = 'data/Gold/Tournament.csv'
 with open(t_file, 'w', newline='') as csvfile:
     logging.info('Writing ' + t_file + ' ...')
-    fieldnames = ['Date','Tournament','Rank','nRounds','nPlayers']
+    fieldnames = ['Date','Tournament','Rank','GameFormat','nRounds','nPlayers']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=',')
 
     writer.writeheader()
@@ -119,8 +119,9 @@ with open(t_file, 'w', newline='') as csvfile:
 s_file = 'data/Gold/Score.csv'
 with open(s_file, 'w', newline='') as csvfile:
     logging.info('Writing ' + s_file + ' ...')
-    fieldnames = ['Datetime','Tournament','TournamentRank','Player1','VictoryPoints1',
-                'TournamentPoints1','TournamentPoints2','VictoryPoints2','Player2',
+    fieldnames = ['Datetime','Tournament','TournamentRank','GameFormat',
+                  'Player1','VictoryPoints1','TournamentPoints1',
+                  'TournamentPoints2','VictoryPoints2','Player2',
                 'Army1','Army2','ScoringType']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=',')
 

@@ -130,6 +130,7 @@ for f in files_to_process:
         if s.Player2 in player_facts:
             s.setArmy2(player_facts[s.Player2]['Army'])
         tournaments[s.Tournament]['Rank'] = s.TournamentRank
+        tournaments[s.Tournament]['GameFormat'] = s.GameFormat
 
     for s in scores:
         if s.Army1 == '':
@@ -150,9 +151,10 @@ for f in files_to_process:
     out_file = 'data/Facts/Score/' + f + '.csv'
     with open(out_file, 'w', newline='') as csvfile:
         logging.info('Writing ' + out_file + ' ...')
-        fieldnames = ['Datetime','Tournament','TournamentRank','Player1','VictoryPoints1',
-                    'TournamentPoints1','TournamentPoints2','VictoryPoints2','Player2',
-                    'Army1','Army2','ScoringType']
+        fieldnames = ['Datetime','Tournament','TournamentRank','GameFormat',
+                      'Player1','VictoryPoints1','TournamentPoints1',
+                      'TournamentPoints2','VictoryPoints2','Player2',
+                      'Army1','Army2','ScoringType']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
 
         writer.writeheader()
@@ -162,7 +164,7 @@ for f in files_to_process:
 t_file = 'data/Facts/Tournament.csv'
 with open(t_file, 'w', newline='') as csvfile:
     logging.info('Writing ' + t_file + ' ...')
-    fieldnames = ['Date','Tournament','Rank','nRounds','nPlayers']
+    fieldnames = ['Date','Tournament','Rank','GameFormat','nRounds','nPlayers']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
 
     writer.writeheader()
