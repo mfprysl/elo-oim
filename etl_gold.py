@@ -8,6 +8,8 @@ from typing import List, Dict
 import csv
 import sys
 from pathlib import Path
+import uuid
+from src.hash_namespace import hash_namespace
 
 logging.basicConfig(level=logging.INFO, format='\t%(message)s')
 
@@ -93,6 +95,8 @@ scores = parse_input.load_all_scores(scores_folder)
 for s in scores:
     s.harmonizePlayers(playerMDM)
     s.harmonizeArmies(armyMDM)
+    s.setPlayer1(uuid.uuid5(hash_namespace,s.Player1))
+    s.setPlayer2(uuid.uuid5(hash_namespace,s.Player2))
 
 if not isinstance(positions_folder, Path):
     positions_folder = Path(positions_folder)
@@ -104,6 +108,7 @@ for file in sorted(positions_folder.glob('*.csv')):
 
 for p in positions:
     p['Army'] = armyMDM.getGoldenKey(p['Tournament'],p['Army'],anyDataProvider=True)
+    p['Player'] = uuid.uuid5(hash_namespace,p['Player'])
 
 tournaments = load_tournaments(tournaments_file)
 
