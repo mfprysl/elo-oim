@@ -80,13 +80,43 @@ def load_player_facts(players_file: Path) -> List[Dict]:
 
     return player_facts
 
+def load_tournament_facts(file: Path) -> Dict:
+
+    encoding = 'utf-8-sig';
+    delimiter = ';';
+
+    tournaments = {}
+
+    if not isinstance(file, Path):
+        file = Path(file)
+
+    logging.info('Reading ' + str(file.resolve()) + ' ...')
+
+    if not file.exists():
+        logging.error(f"File not found: {file}")
+        sys.exit(1)
+  
+    try:
+        with file.open("r", encoding=encoding, newline="") as f:
+            reader = csv.DictReader(f, delimiter=delimiter)
+            for row_number, row in enumerate(reader, start=1):
+                tournaments[row['Tournament']]=row
+
+    except UnicodeDecodeError:
+        logging.error(f"Could not decode file using encoding '{encoding}'.")
+        sys.exit(2)
+    except csv.Error as e:
+        logging.error(f"CSV parsing error: {e}")
+        sys.exit(3)
+
+    return tournaments
 
 print("Combining data for Elo OiM from several files!")
 
 playerMDM = mdm.MasterDataDict()
 parse_input.load_master_data(playerMDM, player_master_data_file)
 
-tournaments = {}
+tournaments = load_tournament_facts('data/Raw/Tournaments.csv')
 
 for f in files_to_process:
     event_date = f[0:10].replace('_','-')
@@ -100,13 +130,19 @@ for f in files_to_process:
     for rpf in raw_player_facts:
         new_pf = {'City': rpf['City'], 'Army': rpf['Army']}
         new_pos = {'Date': event_date, 'Tournament': rpf['Tournament'], 'Position': rpf['P'],
-                          'Player':rpf['Player'], 'Army': rpf['Army']}
+                          'Player':rpf['Player'], 'Army': rpf['Army'],'City': rpf['City']}
 
         player_facts[rpf['Player']] = new_pf
         positions.append(new_pos)
 
         if rpf['Tournament'] != '': 
             if rpf['Tournament'] not in tournaments:
+                logging.warning(f"Tournament {rpf['Tournament']} missing from the raw tournaments file")
+                tournaments[rpf['Tournament']] = {'Tournament':rpf['Tournament'], 
+                    'Date': event_date, 'Rank': 15}
+                
+            if ('nRounds' not in tournaments[rpf['Tournament']] 
+                or tournaments[rpf['Tournament']]['nRounds'] == ''):
                 n_rounds = 0
                 if 'T1' in rpf and rpf['T1'] != '':
                     n_rounds = 1
@@ -118,8 +154,11 @@ for f in files_to_process:
                     n_rounds = 4
                 if 'T5' in rpf and rpf['T5'] != '':
                     n_rounds = 5
-                tournaments[rpf['Tournament']] = {'Tournament':rpf['Tournament'], 
-                    'Date': event_date, 'nRounds':n_rounds, 'nPlayers': 1, 'Rank': 15}
+                tournaments[rpf['Tournament']]['nRounds'] = n_rounds
+
+            if ('nPlayers' not in tournaments[rpf['Tournament']] 
+                or tournaments[rpf['Tournament']]['nPlayers'] == ''):
+                tournaments[rpf['Tournament']]['nPlayers'] = 1
             else:
                 tournaments[rpf['Tournament']]['nPlayers'] = tournaments[rpf['Tournament']]['nPlayers'] + 1
 
@@ -129,8 +168,14 @@ for f in files_to_process:
             s.setArmy1(player_facts[s.Player1]['Army'])
         if s.Player2 in player_facts:
             s.setArmy2(player_facts[s.Player2]['Army'])
-        tournaments[s.Tournament]['Rank'] = s.TournamentRank
-        tournaments[s.Tournament]['GameFormat'] = s.GameFormat
+        if 'Rank' in s.Tournament:
+            s.setTournamentRank(s.Tournament['Rank'])
+        else:
+            tournaments[s.Tournament]['Rank'] = s.TournamentRank
+        if 'GameFormat' in s.Tournament:
+            s.setGameFormat(s.Tournament['GameFormat'])
+        else:
+            tournaments[s.Tournament]['GameFormat'] = s.GameFormat
 
     for s in scores:
         if s.Army1 == '':
@@ -141,7 +186,7 @@ for f in files_to_process:
     pos_file = 'data/Facts/Position/' + f + '_Position.csv'
     with open(pos_file, 'w', newline='') as csvfile:
         logging.info('Writing ' + pos_file + ' ...')
-        fieldnames = ['Date', 'Tournament', 'Position', 'Player', 'Army']
+        fieldnames = ['Date', 'Tournament', 'Position', 'Player', 'City', 'Army']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
 
         writer.writeheader()
@@ -164,7 +209,7 @@ for f in files_to_process:
 t_file = 'data/Facts/Tournament.csv'
 with open(t_file, 'w', newline='') as csvfile:
     logging.info('Writing ' + t_file + ' ...')
-    fieldnames = ['Date','Tournament','Rank','GameFormat','nRounds','nPlayers']
+    fieldnames = ['Date','Tournament','City','Rank','GameFormat','nRounds','nPlayers']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
 
     writer.writeheader()

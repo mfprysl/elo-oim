@@ -129,7 +129,7 @@ with open(e_file, 'w', newline='') as csvfile:
 t_file = 'data/Gold/Tournament.csv'
 with open(t_file, 'w', newline='') as csvfile:
     logging.info('Writing ' + t_file + ' ...')
-    fieldnames = ['Date','Tournament','Rank','GameFormat','nRounds','nPlayers']
+    fieldnames = ['Date','Tournament','City','Rank','GameFormat','nRounds','nPlayers']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=',')
 
     writer.writeheader()
@@ -152,7 +152,7 @@ with open(s_file, 'w', newline='') as csvfile:
 pos_file = 'data/Gold/Position.csv'
 with open(pos_file, 'w', newline='') as csvfile:
     logging.info('Writing ' + pos_file + ' ...')
-    fieldnames = ['Date', 'Tournament', 'Position', 'Player', 'Army']
+    fieldnames = ['Date', 'Tournament', 'Position', 'Player', 'City','Army']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=',')
 
     writer.writeheader()
