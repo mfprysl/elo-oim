@@ -268,7 +268,7 @@ class ScoreFactory:
         try:
             myDatetime = datetime.fromisoformat(row['Datetime'])
         except ValueError:
-            raise ValueError("Wrong datetime format (must be ISO)")
+            raise ValueError(f"Wrong datetime format (must be ISO, is {row['Datetime']})")
         except KeyError:
             raise ValueError("No valid 'Datetime' column found (must be ISO)")
 
@@ -283,8 +283,11 @@ class ScoreFactory:
 
         s.setDatetime(myDatetime)
         s.setTournament(row['Tournament'])
-        s.setTournamentRank(row['TournamentRank'])
-        s.setGameFormat(row['GameFormat'])
+        if 'TournamentRank' in row:
+            s.setTournamentRank(row['TournamentRank'])
+        if 'GameFormat' in row:
+            s.setGameFormat(row['GameFormat'])
+
         s.setPlayer1(row['Player1'])
 
         if 'Army1' in row:
@@ -292,8 +295,9 @@ class ScoreFactory:
         
         s.setVictoryPoints1(row['VictoryPoints1'])
         s.setTournamentPoints1(row['TournamentPoints1'])
-        s.setPlayer2(row['Player2'])
-        
+
+        s.setPlayer2(row['Player2'])     
+
         if 'Army2' in row:
             s.setArmy2(row['Army2'])
         

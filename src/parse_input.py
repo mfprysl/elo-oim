@@ -49,8 +49,8 @@ def load_scores(scores_file: Path) -> List[score.Score]:
                 if 'Datetime' in row and 'Tournament' in row and 'Player1' in row and 'Player2' in row and row['Datetime'] != '' and row['Player1'] != '' and row['Player2'] != '':
                     try:
                         s = scoreFactory.getScore(row)
-                    except ValueError:
-                        logging.warning(f"Malformed data in: {scores_file}")
+                    except ValueError as msg:
+                        logging.warning(f"Malformed data in: {scores_file}; {msg}")
                     else:
                         scores.append(s)
                 else:

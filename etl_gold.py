@@ -116,7 +116,7 @@ ranking = {}
 last_game = calculate_ranks.calculate_ranks(scores, ranking)
 sorted_ranking = sorted(ranking.items(), key=lambda kv: kv[1], reverse=True)
 
-e_file = f"data/Gold/Elo_{last_game.year}_{last_game.month}_{last_game.day}.csv"
+e_file = f"data/Gold/Elo_{last_game.year}_{last_game.month:02d}_{last_game.day:02d}.csv"
 with open(e_file, 'w', newline='') as csvfile:
     logging.info('Writing ' + e_file + ' ...')
     fieldnames = ['Player','Rank']

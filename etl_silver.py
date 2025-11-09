@@ -44,7 +44,8 @@ files_to_process = [
     '2025_09_27_Gdansk',
     '2025_09_27_PolaChwaly',
     '2025_10_11_OiM_MHP',
-    '2025_10_18_Sucha'
+    '2025_10_18_Sucha',
+    '2025_11_08_BoW4'
 ] # data/Raw/Scores/
 
 player_master_data_file = "data/MasterData/player.csv"
@@ -168,12 +169,14 @@ for f in files_to_process:
             s.setArmy1(player_facts[s.Player1]['Army'])
         if s.Player2 in player_facts:
             s.setArmy2(player_facts[s.Player2]['Army'])
-        if 'Rank' in s.Tournament:
-            s.setTournamentRank(s.Tournament['Rank'])
+
+        if 'Rank' in tournaments[s.Tournament]:
+            s.setTournamentRank(tournaments[s.Tournament]['Rank'])
         else:
             tournaments[s.Tournament]['Rank'] = s.TournamentRank
-        if 'GameFormat' in s.Tournament:
-            s.setGameFormat(s.Tournament['GameFormat'])
+
+        if 'GameFormat' in tournaments[s.Tournament]:
+            s.setGameFormat(tournaments[s.Tournament]['GameFormat'])
         else:
             tournaments[s.Tournament]['GameFormat'] = s.GameFormat
 
