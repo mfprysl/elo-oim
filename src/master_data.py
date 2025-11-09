@@ -12,6 +12,11 @@ class MasterDataDict:
                 goldenKey = self.dataProviders[dataProvider][naturalKey]
                 return goldenKey
         
+        if '*' in self.dataProviders:
+            if naturalKey in self.dataProviders['*']:
+                goldenKey = self.dataProviders['*'][naturalKey]
+                return goldenKey
+        
         if anyDataProvider:
             for dp in self.dataProviders:
                 if naturalKey in self.dataProviders[dp]:
