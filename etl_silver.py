@@ -1,8 +1,9 @@
-from datetime import *
+import datetime
 import logging
 from src.score import Score
 import src.parse_input as parse_input
 import src.master_data as mdm
+import src.calculate_ranks as calculate_ranks
 from typing import List, Dict
 import csv
 import sys
@@ -45,7 +46,9 @@ files_to_process = [
     '2025_09_27_PolaChwaly',
     '2025_10_11_OiM_MHP',
     '2025_10_18_Sucha',
-    '2025_11_08_BoW4'
+    '2025_11_08_BoW4',
+    '2025_11_15_Wroclaw',
+    '2025_11_29_Lublin'
 ] # data/Raw/Scores/
 
 player_master_data_file = "data/MasterData/player.csv"
@@ -111,6 +114,37 @@ def load_tournament_facts(file: Path) -> Dict:
         sys.exit(3)
 
     return tournaments
+
+def load_previous_ranking(file: Path) -> Dict:
+
+    encoding = 'utf-8-sig';
+    delimiter = ';';
+
+    players = {}
+
+    if not isinstance(file, Path):
+        file = Path(file)
+
+    logging.info('Reading ' + str(file.resolve()) + ' ...')
+
+    if not file.exists():
+        logging.error(f"File not found: {file}")
+        sys.exit(1)
+  
+    try:
+        with file.open("r", encoding=encoding, newline="") as f:
+            reader = csv.DictReader(f, delimiter=delimiter)
+            for row_number, row in enumerate(reader, start=1):
+                players[row['Player']]=float(row['Rank'])
+
+    except UnicodeDecodeError:
+        logging.error(f"Could not decode file using encoding '{encoding}'.")
+        sys.exit(2)
+    except csv.Error as e:
+        logging.error(f"CSV parsing error: {e}")
+        sys.exit(3)
+
+    return players
 
 print("Combining data for Elo OiM from several files!")
 
@@ -216,6 +250,58 @@ with open(t_file, 'w', newline='') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
 
     writer.writeheader()
-    for t in list(tournaments.values()):
+    for t in tournaments.values():
         writer.writerow(t)
 
+logging.info('Calculating ELO...')
+
+scores = parse_input.load_all_scores('data/Facts/Score')
+
+playerMDM = mdm.MasterDataDict()
+parse_input.load_master_data(playerMDM, player_master_data_file)
+
+for s in scores:
+    s.harmonizePlayers(playerMDM)
+
+ranking = {}
+last_game = calculate_ranks.calculate_ranks(scores, ranking)
+
+logging.info(f"Last game started: {last_game}")
+
+old_elo_files = sorted(Path('data/Facts/Elo').glob('*.csv'), key=lambda x: x.name, reverse=True)
+
+new_ranking_filename = f"Elo_{last_game.year}_{last_game.month:02d}_{last_game.day:02d}.csv"
+previous_ranking_file = ''
+for oef in old_elo_files:
+    if oef.name == new_ranking_filename:
+        continue
+    previous_ranking_file = oef
+    break
+
+logging.info(f"Previous report: {previous_ranking_file.name}")
+previous_ranking = load_previous_ranking(previous_ranking_file)
+
+sorted_ranking = sorted(ranking.items(), key=lambda kv: kv[1], reverse=True)
+
+e_file = f"data/Facts/Elo/{new_ranking_filename}"
+with open(e_file, 'w', newline='') as csvfile:
+    logging.info('Writing ' + e_file + ' ...')
+    fieldnames = ['Player','Rank','Previous Rank','Formatted']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
+
+    writer.writeheader()
+    for i, p in enumerate(sorted_ranking, start=1):
+
+        player = p[0]
+        current_rank = p[1]
+        if player not in previous_ranking:
+            prev_rank = 1000
+            logging.warning(f"A new player detected: {player}")
+        else: 
+            prev_rank = previous_ranking[player]
+        rank_diff = current_rank - prev_rank
+        formatted_rank_diff = f" ({rank_diff:+.2f})" if rank_diff != 0 else ""
+
+        writer.writerow({'Player':player,'Rank':current_rank, 'Previous Rank':prev_rank,
+            'Formatted':f"{i}. {player}: {current_rank:.2f}{formatted_rank_diff}"}
+            )

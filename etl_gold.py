@@ -1,4 +1,4 @@
-from datetime import *
+import datetime
 import logging
 from src.score import Score
 import src.parse_input as parse_input
