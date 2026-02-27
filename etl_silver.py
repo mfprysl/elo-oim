@@ -48,7 +48,12 @@ files_to_process = [
     '2025_10_18_Sucha',
     '2025_11_08_BoW4',
     '2025_11_15_Wroclaw',
-    '2025_11_29_Lublin'
+    '2025_11_29_Lublin',
+    '2025_12_13_Lodz',
+    '2026_01_10_Lodz',
+    '2026_01_24_Poznan',
+    '2026_01_25_Wroclaw',
+    '2026_02_21_Pulawy'
 ] # data/Raw/Scores/
 
 player_master_data_file = "data/MasterData/player.csv"
@@ -216,9 +221,9 @@ for f in files_to_process:
 
     for s in scores:
         if s.Army1 == '':
-            logging.error(s.__str__())
+            logging.error('Missing Army1: ' + s.__str__())
         if s.Army2 == '':
-            logging.error(s.__str__())
+            logging.error('Missing Army2: ' + s.__str__())
 
     pos_file = 'data/Facts/Position/' + f + '_Position.csv'
     with open(pos_file, 'w', newline='') as csvfile:
