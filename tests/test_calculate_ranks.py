@@ -88,4 +88,4 @@ class Test_CalculateRanks(unittest.TestCase):
         s1.setVictoryPoints1(6).setVictoryPoints2(7)
         scores.append(s1)
         result = cr.calculate_ranks(scores, r)
-        self.assertEqual(result,datetime.fromisoformat('2009-10-08 11:00'))
+        self.assertEqual(result[-1]["Datetime"],datetime.fromisoformat('2009-10-08 11:00'))

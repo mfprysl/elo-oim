@@ -271,13 +271,13 @@ for s in scores:
     s.harmonizePlayers(playerMDM)
 
 ranking = {}
-last_game = calculate_ranks.calculate_ranks(scores, ranking)
+ledger = calculate_ranks.calculate_ranks(scores, ranking)
 
-logging.info(f"Last game started: {last_game}")
+logging.info(f"Last game started: {ledger[-1]['Datetime']}")
 
 old_elo_files = sorted(Path('data/Facts/Elo').glob('*.csv'), key=lambda x: x.name, reverse=True)
 
-new_ranking_filename = f"Elo_{last_game.year}_{last_game.month:02d}_{last_game.day:02d}.csv"
+new_ranking_filename = f"Elo_{ledger[-1]['Datetime'].year}_{ledger[-1]['Datetime'].month:02d}_{ledger[-1]['Datetime'].day:02d}.csv"
 previous_ranking_file = ''
 for oef in old_elo_files:
     if oef.name == new_ranking_filename:
@@ -312,3 +312,14 @@ with open(e_file, 'w', newline='') as csvfile:
         writer.writerow({'Player':player,'Rank':current_rank, 'Previous Rank':prev_rank,
             'Formatted':f"{i}. {player}: {current_rank:.2f}{formatted_rank_diff}"}
             )
+
+ledger_file = f"data/Facts/ledger.csv"
+with open(ledger_file, 'w', newline='') as csvfile:
+    logging.info('Writing ' + ledger_file + ' ...')
+    fieldnames = ['Datetime','Tournament','Player1','Rank1','NewRank1','diff1',
+                  'Player2','Rank2','NewRank2','diff2']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter=';')
+
+    writer.writeheader()
+    for entry in ledger:
+        writer.writerow(entry)

@@ -26,10 +26,25 @@ def adjust_rank_by_score(s: Score, ranking:Dict[str,float]):
     ranking[s.Player1] = P1_new_rank
     ranking[s.Player2] = P2_new_rank
 
-def calculate_ranks(scores: List[Score],ranking:Dict[str,float]) -> datetime:
-    max_datetime = datetime.fromisoformat('1900-01-01 00:00')
+def calculate_ranks(scores: List[Score],ranking:Dict[str,float]) -> List:
+
     sort_scores(scores)
+
+    ledger = []
+    
     for s in scores:
+        l = {}
+        l["Datetime"] = s.Datetime
+        l["Tournament"] = s.Tournament
+        l["Player1"] = s.Player1
+        l["Player2"] = s.Player2
+        l["Rank1"] = ranking[s.Player1] if s.Player1 in ranking else 1000
+        l["Rank2"] = ranking[s.Player2] if s.Player2 in ranking else 1000
         adjust_rank_by_score(s, ranking)
-        max_datetime = s.Datetime
-    return max_datetime
+        l["NewRank1"] = ranking[s.Player1]
+        l["NewRank2"] = ranking[s.Player2]
+        l["diff1"] = l["NewRank1"] - l["Rank1"]
+        l["diff2"] = l["NewRank2"] - l["Rank2"]
+        ledger.append(l)
+
+    return ledger
