@@ -9,7 +9,7 @@ import csv
 import sys
 from pathlib import Path
 
-logging.basicConfig(level=logging.INFO, format='\t%(message)s')
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
 files_to_process = [
     '2023_06_18_Warszawa',
@@ -53,7 +53,9 @@ files_to_process = [
     '2026_01_10_Lodz',
     '2026_01_24_Poznan',
     '2026_01_25_Wroclaw',
-    '2026_02_21_Pulawy'
+    '2026_02_21_Pulawy',
+    '2026_03_21_Krakow_Z',
+    '2026_03_21_Krakow_P'
 ] # data/Raw/Scores/
 
 player_master_data_file = "data/MasterData/player.csv"
