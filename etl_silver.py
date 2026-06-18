@@ -55,7 +55,10 @@ files_to_process = [
     '2026_01_25_Wroclaw',
     '2026_02_21_Pulawy',
     '2026_03_21_Krakow_Z',
-    '2026_03_21_Krakow_P'
+    '2026_03_21_Krakow_P',
+    '2026_04_25_Lodz',
+    '2026_05_31_Wroclaw',
+    '2026_06_06_Sucha'
 ] # data/Raw/Scores/
 
 player_master_data_file = "data/MasterData/player.csv"
@@ -170,6 +173,10 @@ for f in files_to_process:
     positions = []
 
     for rpf in raw_player_facts:
+        _player = playerMDM.getGoldenKey(rpf['Tournament'], rpf['Player'])
+        if _player != '':
+            rpf['Player'] = _player
+
         new_pf = {'City': rpf['City'], 'Army': rpf['Army']}
         new_pos = {'Date': event_date, 'Tournament': rpf['Tournament'], 'Position': rpf['P'],
                           'Player':rpf['Player'], 'Army': rpf['Army'],'City': rpf['City']}
